@@ -18,14 +18,25 @@ class GameViewController: UIViewController {
     @IBOutlet var indicatorA: UIView!
     @IBOutlet var indicatorB: UIView!
 
-    override func viewDidLoad() {
+    @IBAction func newGame(_ sender: UIButton) {
+        print("NEW GAME")
 
+        game.reset()
+    }
+
+
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         indicatorB.alpha = 0
     }
 
 
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
+    
     @IBAction func tileTouched(_ button: UIButton) {
 
         let (x, y) = coordinates(tag: button.tag)
@@ -41,6 +52,8 @@ class GameViewController: UIViewController {
 extension GameViewController: GameDelegate {
 
     func stateChanged(x: Int, y: Int, state: Game.TileState) {
+
+        print("STATE CHANGED")
 
         if let view = self.view.viewWithTag(tag(x: x, y: y))?.superview {
 
@@ -62,10 +75,14 @@ extension GameViewController: GameDelegate {
 
     func currentPlayerChanged(player: Game.Player) {
 
+        print ("PLAYER CHANGED")
+
         switch player {
+
         case .playerA:
             indicatorA.alpha = 1
             indicatorB.alpha = 0
+            
         case .playerB:
             indicatorA.alpha = 0
             indicatorB.alpha = 1
@@ -75,6 +92,7 @@ extension GameViewController: GameDelegate {
 
     func scoreChanged(score: [Game.Player:Int]) {
 
+        print("SCORE CHANGED")
         labelScoreA.text = "\(score[Game.Player.playerA]!)"
         labelScoreB.text = "\(score[Game.Player.playerB]!)"
     }

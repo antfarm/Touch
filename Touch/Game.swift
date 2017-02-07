@@ -52,8 +52,20 @@ class Game {
     }
 
 
-    init() {
+    func reset() {
 
+        print("INIT NEW GAME")
+
+        currentPlayer = .playerA
+
+        score = [.playerA: 0, .playerB: 0]
+        delegate?.scoreChanged(score: score)
+
+        for x in (0..<7) {
+            for y in (0..<7) {
+                setTileState(x: x, y: y, state: .empty)
+            }
+        }
     }
 
 
