@@ -99,9 +99,8 @@
 			children = (
 				1465C66C1E49EA2C003EE7BC /* AppDelegate.swift */,
 				1465C66E1E49EA2C003EE7BC /* ViewController.swift */,
-				1465C6701E49EA2C003EE7BC /* Main.storyboard */,
+				1465C69A1E49F41A003EE7BC /* UI */,
 				1465C6731E49EA2C003EE7BC /* Assets.xcassets */,
-				1465C6751E49EA2C003EE7BC /* LaunchScreen.storyboard */,
 				1465C6781E49EA2C003EE7BC /* Info.plist */,
 			);
 			path = Touch;
@@ -123,6 +122,15 @@
 				1465C68E1E49EA2C003EE7BC /* Info.plist */,
 			);
 			path = TouchUITests;
+			sourceTree = "<group>";
+		};
+		1465C69A1E49F41A003EE7BC /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1465C6751E49EA2C003EE7BC /* LaunchScreen.storyboard */,
+				1465C6701E49EA2C003EE7BC /* Main.storyboard */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -417,6 +425,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NC55XYQH45;
 				INFOPLIST_FILE = Touch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.antfarm.Touch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -430,6 +439,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NC55XYQH45;
 				INFOPLIST_FILE = Touch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.antfarm.Touch;
 				PRODUCT_NAME = "$(TARGET_NAME)";

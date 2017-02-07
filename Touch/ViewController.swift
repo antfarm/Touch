@@ -21,5 +21,12 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func tileTouched(_ button: UIButton) {
+
+        let x = button.tag % 7
+        let y = button.tag / 7
+
+        print("[\(x) | \(y)]")
+    }
 }
 
