@@ -23,20 +23,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQl-K3-BHs" userLabel="Score View">
+                                <rect key="frame" x="16" y="40" width="288" height="100"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jkA-k1-oT1">
+                                        <rect key="frame" x="5" y="5" width="278" height="90"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32s-pU-LtS" userLabel="Label A">
+                                                <rect key="frame" x="0.0" y="0.0" width="136.5" height="90"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="80"/>
+                                                <color key="textColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3B-Ru-4wQ" userLabel="Label B">
+                                                <rect key="frame" x="141.5" y="0.0" width="136.5" height="90"/>
+                                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="80"/>
+                                                <color key="textColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="jkA-k1-oT1" firstAttribute="trailing" secondItem="kQl-K3-BHs" secondAttribute="trailing" constant="-5" id="LOS-tG-oUH"/>
+                                    <constraint firstItem="jkA-k1-oT1" firstAttribute="leading" secondItem="kQl-K3-BHs" secondAttribute="leading" constant="5" id="MXD-hg-nRJ"/>
+                                    <constraint firstItem="jkA-k1-oT1" firstAttribute="top" secondItem="kQl-K3-BHs" secondAttribute="top" constant="5" id="O35-Fc-m24"/>
+                                    <constraint firstItem="jkA-k1-oT1" firstAttribute="bottom" secondItem="kQl-K3-BHs" secondAttribute="bottom" constant="-5" id="TPJ-Rd-jKT"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAH-bP-Bc1" userLabel="Grid View">
                                 <rect key="frame" x="16" y="180" width="288" height="288"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="2rY-L8-NtJ">
-                                        <rect key="frame" x="1" y="1" width="286" height="286"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="2rY-L8-NtJ">
+                                        <rect key="frame" x="5" y="5" width="278" height="278"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="SU8-Do-NAh">
-                                                <rect key="frame" x="0.0" y="0.0" width="286" height="40"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="SU8-Do-NAh">
+                                                <rect key="frame" x="0.0" y="0.0" width="278" height="38"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yuu-wf-RsJ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="49" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I9m-pz-TMR">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z6V-9y-ufi"/>
                                                                 </connections>
@@ -51,10 +82,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0FM-6d-QXN">
-                                                        <rect key="frame" x="41" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="40" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7j-qn-2gi">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5NC-G9-alr"/>
                                                                 </connections>
@@ -69,10 +100,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KyR-gR-cxi">
-                                                        <rect key="frame" x="82" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="80" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cPj-C4-6sF">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XBX-cK-51s"/>
                                                                 </connections>
@@ -87,10 +118,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjd-cG-b4y">
-                                                        <rect key="frame" x="123" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="120" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Buf-wg-ymK">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bzf-78-zqY"/>
                                                                 </connections>
@@ -105,10 +136,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZB-Mf-uV9">
-                                                        <rect key="frame" x="164" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="160" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2H5-FB-31n">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jg8-It-UT8"/>
                                                                 </connections>
@@ -123,10 +154,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GFA-p9-62n">
-                                                        <rect key="frame" x="205" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="200" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rBC-TH-jgc">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2Zg-7C-lbq"/>
                                                                 </connections>
@@ -141,10 +172,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WD4-Ou-b54">
-                                                        <rect key="frame" x="246" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="240" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKT-DJ-SpU">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nnl-3M-k3Y"/>
                                                                 </connections>
@@ -160,14 +191,14 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="tFi-Cr-huA">
-                                                <rect key="frame" x="0.0" y="41" width="286" height="40"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="tFi-Cr-huA">
+                                                <rect key="frame" x="0.0" y="40" width="278" height="38"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="64P-7C-UdQ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRo-GN-mPR">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1gf-jP-Z2t"/>
                                                                 </connections>
@@ -182,10 +213,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TkI-jM-VED">
-                                                        <rect key="frame" x="41" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="40" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1E-8i-QeV">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kCw-Vz-LXI"/>
                                                                 </connections>
@@ -200,10 +231,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dFE-IW-yGF">
-                                                        <rect key="frame" x="82" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="80" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0T-w2-80O">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WDN-ED-bqH"/>
                                                                 </connections>
@@ -218,10 +249,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nMk-34-PLQ">
-                                                        <rect key="frame" x="123" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="120" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fih-M9-u1t">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iXP-4c-6iI"/>
                                                                 </connections>
@@ -236,10 +267,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJT-6l-lTp">
-                                                        <rect key="frame" x="164" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="160" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wab-Cv-PSr">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EJ3-PL-V99"/>
                                                                 </connections>
@@ -254,10 +285,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0te-bZ-6gc">
-                                                        <rect key="frame" x="205" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="200" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWU-xJ-bVL">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N25-Jm-8jo"/>
                                                                 </connections>
@@ -272,10 +303,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyR-rn-6wg">
-                                                        <rect key="frame" x="246" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="240" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Umx-c1-0Nb">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kZt-Ki-LWx"/>
                                                                 </connections>
@@ -291,14 +322,14 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="3pN-uB-fpN">
-                                                <rect key="frame" x="0.0" y="82" width="286" height="40"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="3pN-uB-fpN">
+                                                <rect key="frame" x="0.0" y="80" width="278" height="38"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZQb-B5-5Zm">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmC-qJ-c0p">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kKs-AP-9hJ"/>
                                                                 </connections>
@@ -313,10 +344,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWR-MR-EGS">
-                                                        <rect key="frame" x="41" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="40" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="15" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3NU-AU-vc3">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5UT-OA-95R"/>
                                                                 </connections>
@@ -331,10 +362,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYZ-hY-LbE">
-                                                        <rect key="frame" x="82" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="80" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yOn-V3-2bN">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fsb-Fd-fJt"/>
                                                                 </connections>
@@ -349,10 +380,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxc-fu-opL">
-                                                        <rect key="frame" x="123" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="120" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="17" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lS3-4S-WGB">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="abd-29-XbV"/>
                                                                 </connections>
@@ -367,10 +398,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="55F-E4-nvy">
-                                                        <rect key="frame" x="164" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="160" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="18" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="prg-58-xgy">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b8r-NK-PqV"/>
                                                                 </connections>
@@ -385,10 +416,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="394-y0-Unu">
-                                                        <rect key="frame" x="205" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="200" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="19" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xh8-Bd-U2o">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vfo-jc-b1a"/>
                                                                 </connections>
@@ -403,10 +434,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3zK-RX-FhC">
-                                                        <rect key="frame" x="246" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="240" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVj-MX-6hH">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0rU-P5-cb2"/>
                                                                 </connections>
@@ -422,14 +453,14 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="VWH-RT-r9V">
-                                                <rect key="frame" x="0.0" y="123" width="286" height="40"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="VWH-RT-r9V">
+                                                <rect key="frame" x="0.0" y="120" width="278" height="38"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rA-1g-547">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHH-Tf-CsU">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="agz-ax-bM1"/>
                                                                 </connections>
@@ -444,10 +475,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4qU-0M-4ge">
-                                                        <rect key="frame" x="41" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="40" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="22" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgG-kY-59c">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="74f-4V-F7F"/>
                                                                 </connections>
@@ -462,10 +493,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cUQ-XL-woL">
-                                                        <rect key="frame" x="82" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="80" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8J2-mB-e4d">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="r5c-DB-A68"/>
                                                                 </connections>
@@ -480,10 +511,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q5g-mj-11f">
-                                                        <rect key="frame" x="123" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="120" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="24" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQ0-QJ-fSm">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XMV-KL-ybk"/>
                                                                 </connections>
@@ -498,10 +529,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L6S-bk-zXE">
-                                                        <rect key="frame" x="164" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="160" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="25" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4E-5D-qZE">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P49-lf-obw"/>
                                                                 </connections>
@@ -516,10 +547,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bWW-cc-WpY">
-                                                        <rect key="frame" x="205" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="200" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="26" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="keN-Of-SIZ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s20-fR-cn1"/>
                                                                 </connections>
@@ -534,10 +565,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZg-OZ-tjp">
-                                                        <rect key="frame" x="246" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="240" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="27" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFe-Wy-Nna">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JS6-b6-5th"/>
                                                                 </connections>
@@ -553,14 +584,14 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="Lov-gN-OjL">
-                                                <rect key="frame" x="0.0" y="164" width="286" height="40"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Lov-gN-OjL">
+                                                <rect key="frame" x="0.0" y="160" width="278" height="38"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u4Y-H3-SGh">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="28" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JM1-V4-ejx">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vdQ-8Q-vUf"/>
                                                                 </connections>
@@ -575,10 +606,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z2w-FY-qTY">
-                                                        <rect key="frame" x="41" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="40" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="29" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYo-lL-1uq">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2bQ-Hc-X85"/>
                                                                 </connections>
@@ -593,10 +624,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PcH-W6-eN5">
-                                                        <rect key="frame" x="82" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="80" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="30" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1S-r8-2Um">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LhO-IV-IgL"/>
                                                                 </connections>
@@ -611,10 +642,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cDT-od-NyU">
-                                                        <rect key="frame" x="123" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="120" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ly1-FE-nBL">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JjW-b1-yEc"/>
                                                                 </connections>
@@ -629,10 +660,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLf-4s-mM4">
-                                                        <rect key="frame" x="164" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="160" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="32" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hJ-jr-Tto">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pdb-yL-Luo"/>
                                                                 </connections>
@@ -647,10 +678,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="foR-bj-WII">
-                                                        <rect key="frame" x="205" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="200" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="33" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q1e-pf-EPb">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q8N-WW-j9p"/>
                                                                 </connections>
@@ -665,10 +696,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6t-B3-gfz">
-                                                        <rect key="frame" x="246" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="240" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="34" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Scg-zF-vh2">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XBZ-tk-4w3"/>
                                                                 </connections>
@@ -684,14 +715,14 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="43U-gi-urk">
-                                                <rect key="frame" x="0.0" y="205" width="286" height="40"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="43U-gi-urk">
+                                                <rect key="frame" x="0.0" y="200" width="278" height="38"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INl-l7-rCo">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="35" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIO-rG-yaW">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f9S-W2-Mt4"/>
                                                                 </connections>
@@ -706,10 +737,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vQN-jM-hR7">
-                                                        <rect key="frame" x="41" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="40" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="36" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Jl-s9-OYC">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tqK-bb-qPf"/>
                                                                 </connections>
@@ -724,10 +755,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQy-rJ-dyq">
-                                                        <rect key="frame" x="82" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="80" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="37" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1l-vW-BE9">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aaX-fp-ySi"/>
                                                                 </connections>
@@ -742,10 +773,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKV-i0-XMd">
-                                                        <rect key="frame" x="123" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="120" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="38" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPe-iK-0Pq">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2Eg-wZ-ORJ"/>
                                                                 </connections>
@@ -760,10 +791,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAH-wa-Tib">
-                                                        <rect key="frame" x="164" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="160" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="39" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXE-al-dNo">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JS9-KP-sRS"/>
                                                                 </connections>
@@ -778,10 +809,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y6J-ZA-lY7">
-                                                        <rect key="frame" x="205" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="200" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="40" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZIa-MF-uGq">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xT2-XT-0NI"/>
                                                                 </connections>
@@ -796,10 +827,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ku9-AB-pEz">
-                                                        <rect key="frame" x="246" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="240" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="41" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rGZ-u9-hNz">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KUM-Hk-XeU"/>
                                                                 </connections>
@@ -815,14 +846,14 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="b8J-XK-kUo">
-                                                <rect key="frame" x="0.0" y="246" width="286" height="40"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="b8J-XK-kUo">
+                                                <rect key="frame" x="0.0" y="240" width="278" height="38"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Re-Iw-1pZ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="42" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aEe-wy-h5Z">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Of-LZ-DAr"/>
                                                                 </connections>
@@ -837,10 +868,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g3j-hS-Zrp">
-                                                        <rect key="frame" x="41" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="40" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="43" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtK-oc-ktc">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zqx-iU-kWH"/>
                                                                 </connections>
@@ -855,10 +886,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rks-gk-Rte">
-                                                        <rect key="frame" x="82" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="80" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="44" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wV-2n-rhu">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3rh-kf-2ee"/>
                                                                 </connections>
@@ -873,10 +904,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bqH-Aq-Ukd">
-                                                        <rect key="frame" x="123" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="120" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="45" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VG5-A7-JWc">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ox4-oh-hTe"/>
                                                                 </connections>
@@ -891,10 +922,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y4h-d8-Z3t">
-                                                        <rect key="frame" x="164" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="160" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="46" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Zc-Tw-upg">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1VA-Gz-zPr"/>
                                                                 </connections>
@@ -909,10 +940,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9zu-ge-xW1">
-                                                        <rect key="frame" x="205" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="200" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="47" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suf-hS-7Nl">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ttR-de-ArW"/>
                                                                 </connections>
@@ -927,10 +958,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ruo-dp-SNe">
-                                                        <rect key="frame" x="246" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="240" y="0.0" width="38" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="48" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="742-TI-p77">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                                 <connections>
                                                                     <action selector="tileTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sHD-iy-cB4"/>
                                                                 </connections>
@@ -949,21 +980,25 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.15322264983812595" green="0.091266694975427734" blue="0.15767844200134273" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="2rY-L8-NtJ" firstAttribute="top" secondItem="fAH-bP-Bc1" secondAttribute="top" constant="1" id="2YG-lD-iCX"/>
-                                    <constraint firstItem="2rY-L8-NtJ" firstAttribute="leading" secondItem="fAH-bP-Bc1" secondAttribute="leading" constant="1" id="3OM-Sp-Oip"/>
+                                    <constraint firstItem="2rY-L8-NtJ" firstAttribute="top" secondItem="fAH-bP-Bc1" secondAttribute="top" constant="5" id="2YG-lD-iCX"/>
+                                    <constraint firstItem="2rY-L8-NtJ" firstAttribute="leading" secondItem="fAH-bP-Bc1" secondAttribute="leading" constant="5" id="3OM-Sp-Oip"/>
                                     <constraint firstAttribute="width" secondItem="fAH-bP-Bc1" secondAttribute="height" multiplier="1:1" id="TPu-kM-WcJ"/>
-                                    <constraint firstItem="2rY-L8-NtJ" firstAttribute="trailing" secondItem="fAH-bP-Bc1" secondAttribute="trailing" constant="-1" id="dKQ-dL-UhV"/>
-                                    <constraint firstItem="2rY-L8-NtJ" firstAttribute="bottom" secondItem="fAH-bP-Bc1" secondAttribute="bottom" constant="-1" id="v4m-JE-2B9"/>
+                                    <constraint firstItem="2rY-L8-NtJ" firstAttribute="trailing" secondItem="fAH-bP-Bc1" secondAttribute="trailing" constant="-5" id="dKQ-dL-UhV"/>
+                                    <constraint firstItem="2rY-L8-NtJ" firstAttribute="bottom" secondItem="fAH-bP-Bc1" secondAttribute="bottom" constant="-5" id="v4m-JE-2B9"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="kQl-K3-BHs" firstAttribute="bottom" secondItem="fAH-bP-Bc1" secondAttribute="top" constant="-40" id="CeW-qL-LDv"/>
                             <constraint firstItem="fAH-bP-Bc1" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="D4h-Mm-RLj"/>
+                            <constraint firstItem="kQl-K3-BHs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Gjl-Hs-qra"/>
+                            <constraint firstItem="kQl-K3-BHs" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Kah-xi-q6b"/>
                             <constraint firstItem="fAH-bP-Bc1" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="-100" id="SNH-NN-Z0G"/>
                             <constraint firstItem="fAH-bP-Bc1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="e5M-XK-jtR"/>
+                            <constraint firstItem="kQl-K3-BHs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="yED-b7-mbS"/>
                         </constraints>
                     </view>
                 </viewController>

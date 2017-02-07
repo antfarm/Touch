@@ -29,6 +29,7 @@ class GameViewController: UIViewController {
     }
 }
 
+
 extension GameViewController: GameDelegate {
 
     func stateChanged(x: Int, y: Int, state: Game.TileState) {
@@ -52,6 +53,11 @@ extension GameViewController: GameDelegate {
 
 
     func currentPlayerChanged(player: Game.Player) {
+        
+    }
+
+
+    func scoreChanged(score: [Game.Player:Int]) {
         
     }
 
