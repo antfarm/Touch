@@ -46,8 +46,8 @@ class Game {
 
 
     private(set) var currentPlayer: Player = .playerA {
-        didSet(player) {
-            delegate?.currentPlayerChanged(player: player)
+        didSet {
+            delegate?.currentPlayerChanged(player: currentPlayer)
         }
     }
 
@@ -82,7 +82,6 @@ class Game {
 
             if player == opponent {
                 score[opponent]! -= 1
-                score[currentPlayer]! += 1
 
                 setTileState(x: x, y: y, state: .destroyed)
                 print("OWNED BY \(player) -> DESTROY")

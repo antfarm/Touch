@@ -15,8 +15,14 @@ class GameViewController: UIViewController {
     @IBOutlet var labelScoreA: UILabel!
     @IBOutlet var labelScoreB: UILabel!
 
+    @IBOutlet var indicatorA: UIView!
+    @IBOutlet var indicatorB: UIView!
+
     override func viewDidLoad() {
+
         super.viewDidLoad()
+
+        indicatorB.alpha = 0
     }
 
 
@@ -55,7 +61,15 @@ extension GameViewController: GameDelegate {
 
 
     func currentPlayerChanged(player: Game.Player) {
-        
+
+        switch player {
+        case .playerA:
+            indicatorA.alpha = 1
+            indicatorB.alpha = 0
+        case .playerB:
+            indicatorA.alpha = 0
+            indicatorB.alpha = 1
+        }
     }
 
 
