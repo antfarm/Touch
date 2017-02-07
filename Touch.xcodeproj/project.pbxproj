@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		1465C66D1E49EA2C003EE7BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465C66C1E49EA2C003EE7BC /* AppDelegate.swift */; };
-		1465C66F1E49EA2C003EE7BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465C66E1E49EA2C003EE7BC /* ViewController.swift */; };
+		1465C66F1E49EA2C003EE7BC /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465C66E1E49EA2C003EE7BC /* GameViewController.swift */; };
 		1465C6721E49EA2C003EE7BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1465C6701E49EA2C003EE7BC /* Main.storyboard */; };
 		1465C6741E49EA2C003EE7BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1465C6731E49EA2C003EE7BC /* Assets.xcassets */; };
 		1465C6771E49EA2C003EE7BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1465C6751E49EA2C003EE7BC /* LaunchScreen.storyboard */; };
 		1465C6821E49EA2C003EE7BC /* TouchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465C6811E49EA2C003EE7BC /* TouchTests.swift */; };
 		1465C68D1E49EA2C003EE7BC /* TouchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465C68C1E49EA2C003EE7BC /* TouchUITests.swift */; };
+		14EFBFF61E4A15CD009F121F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFBFF51E4A15CD009F121F /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,7 @@
 /* Begin PBXFileReference section */
 		1465C6691E49EA2C003EE7BC /* Touch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Touch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1465C66C1E49EA2C003EE7BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1465C66E1E49EA2C003EE7BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1465C66E1E49EA2C003EE7BC /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		1465C6711E49EA2C003EE7BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1465C6731E49EA2C003EE7BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1465C6761E49EA2C003EE7BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +48,7 @@
 		1465C6881E49EA2C003EE7BC /* TouchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TouchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1465C68C1E49EA2C003EE7BC /* TouchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchUITests.swift; sourceTree = "<group>"; };
 		1465C68E1E49EA2C003EE7BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14EFBFF51E4A15CD009F121F /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				1465C66C1E49EA2C003EE7BC /* AppDelegate.swift */,
-				1465C66E1E49EA2C003EE7BC /* ViewController.swift */,
+				1465C66E1E49EA2C003EE7BC /* GameViewController.swift */,
+				14EFBFF51E4A15CD009F121F /* Game.swift */,
 				1465C69A1E49F41A003EE7BC /* UI */,
 				1465C6731E49EA2C003EE7BC /* Assets.xcassets */,
 				1465C6781E49EA2C003EE7BC /* Info.plist */,
@@ -270,7 +273,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1465C66F1E49EA2C003EE7BC /* ViewController.swift in Sources */,
+				1465C66F1E49EA2C003EE7BC /* GameViewController.swift in Sources */,
+				14EFBFF61E4A15CD009F121F /* Game.swift in Sources */,
 				1465C66D1E49EA2C003EE7BC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,6 +528,7 @@
 				1465C6931E49EA2C003EE7BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1465C6941E49EA2C003EE7BC /* Build configuration list for PBXNativeTarget "TouchTests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +537,7 @@
 				1465C6961E49EA2C003EE7BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1465C6971E49EA2C003EE7BC /* Build configuration list for PBXNativeTarget "TouchUITests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +546,7 @@
 				1465C6991E49EA2C003EE7BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
