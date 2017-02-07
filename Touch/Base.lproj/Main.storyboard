@@ -1001,6 +1001,10 @@
                             <constraint firstItem="kQl-K3-BHs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="yED-b7-mbS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="labelScoreA" destination="32s-pU-LtS" id="t60-T8-6sd"/>
+                        <outlet property="labelScoreB" destination="J3B-Ru-4wQ" id="rJu-UI-cda"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

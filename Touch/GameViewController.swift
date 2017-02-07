@@ -12,7 +12,9 @@ class GameViewController: UIViewController {
 
     var game: Game!
 
-    
+    @IBOutlet var labelScoreA: UILabel!
+    @IBOutlet var labelScoreB: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -58,7 +60,9 @@ extension GameViewController: GameDelegate {
 
 
     func scoreChanged(score: [Game.Player:Int]) {
-        
+
+        labelScoreA.text = "\(score[Game.Player.playerA]!)"
+        labelScoreB.text = "\(score[Game.Player.playerB]!)"
     }
 
 
