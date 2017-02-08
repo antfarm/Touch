@@ -144,7 +144,7 @@ class Game {
     }
     
     
-    func claimTileForPlayer(x: Int, y: Int, player: Player) {
+    private func claimTileForPlayer(x: Int, y: Int, player: Player) {
 
         let currentState = grid[x][y]
 
