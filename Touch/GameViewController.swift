@@ -12,11 +12,9 @@ class GameViewController: UIViewController {
 
     var game: Game!
 
-    @IBOutlet var labelScoreA: UILabel!
-    @IBOutlet var labelScoreB: UILabel!
+    var gameView: GameView { return view as! GameView }
 
-    @IBOutlet var indicatorA: UIView!
-    @IBOutlet var indicatorB: UIView!
+    override var prefersStatusBarHidden: Bool { return true }
 
 
     override func viewDidLoad() {
@@ -26,17 +24,11 @@ class GameViewController: UIViewController {
     }
 
 
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-
-    
     @IBAction func tileTouched(_ button: UIButton) {
 
         let (x, y) = coordinates(tag: button.tag)
-        let t = tag(x: x, y: y)
 
-        print("\nTILE TOUCHED x: \(x), y: \(y), tag: \(t)")
+        print("\nTILE TOUCHED tag: \(button.tag) -> x: \(x), y: \(y)")
 
         game.makeMove(x: x, y: y)
     }
@@ -54,20 +46,19 @@ extension GameViewController: GameDelegate {
 
     func stateChanged(x: Int, y: Int, state: Game.TileState) {
 
-        print("\t\t\tSTATE CHANGED x: \(x), y: \(y), state: \(state)")
+        let tag = tagForCoordinates(x: x, y: y)
 
-        let buttonTag = tag(x: x, y: y)
-        let tileView = self.view.viewWithTag(buttonTag)!.superview as! TileView
+        print("\t\t\tSTATE CHANGED state: \(state), x: \(x), y: \(y) -> tag: \(tag)")
 
         switch state {
         case .empty:
-            tileView.setEmpty()
+            gameView.setTileEmpty(tag: tag)
         case .owned(let player) where player == .playerA:
-            tileView.setOwnedByPlayerA()
+            gameView.setTileOwnedByPlayerA(tag: tag)
         case .owned:
-            tileView.setOwnedByPlayerB()
+            gameView.setTileOwnedByPlayerB(tag: tag)
         case .destroyed:
-            tileView.setDestroyed()
+            gameView.setTileDestroyed(tag: tag)
         }
     }
 
@@ -77,14 +68,10 @@ extension GameViewController: GameDelegate {
         print ("PLAYER CHANGED: \(player.rawValue)")
 
         switch player {
-
         case .playerA:
-            indicatorA.alpha = 1
-            indicatorB.alpha = 0
-            
+            gameView.setTurnIndicatorPlayerA()
         case .playerB:
-            indicatorA.alpha = 0
-            indicatorB.alpha = 1
+            gameView.setTurnIndicatorPlayerB()
         }
     }
 
@@ -93,8 +80,7 @@ extension GameViewController: GameDelegate {
 
         print("SCORE CHANGED: \(score[.playerA]!) - \(score[.playerB]!)")
 
-        labelScoreA.text = "\(score[.playerA]!)"
-        labelScoreB.text = "\(score[.playerB]!)"
+        gameView.setScore(playerA: score[.playerA]!, playerB: score[.playerB]!)
     }
 
 
@@ -119,18 +105,22 @@ extension GameViewController: GameDelegate {
 
 extension GameViewController {
 
-    // (0, 0) has tag 49
-
     fileprivate func coordinates(tag: Int) -> (x: Int, y: Int) {
 
-        let tag = tag == 49 ? 0 : tag
+        if tag == 49 {
+            return (x: 0, y: 0)
+        }
+
         return (x: tag % 7, y: tag / 7)
     }
 
 
-    fileprivate func tag(x: Int, y: Int) -> Int {
+    fileprivate func tagForCoordinates(x: Int, y: Int) -> Int {
 
-        let tag = x + y * 7
-        return tag == 0 ? 49 : tag
+        if x == 0 && y == 0 {
+            return 49
+        }
+
+        return x + y * 7
     }
 }
