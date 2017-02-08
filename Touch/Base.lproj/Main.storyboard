@@ -1046,10 +1046,12 @@
                             <constraint firstItem="kQl-K3-BHs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="yED-b7-mbS"/>
                         </constraints>
                         <connections>
+                            <outlet property="gridView" destination="fAH-bP-Bc1" id="UbW-XB-eAg"/>
                             <outlet property="indicatorA" destination="4sa-PH-m8k" id="qo2-Av-NaT"/>
                             <outlet property="indicatorB" destination="zXR-0O-lEb" id="50z-Qy-GIM"/>
                             <outlet property="labelScoreA" destination="32s-pU-LtS" id="ubi-sW-uYB"/>
                             <outlet property="labelScoreB" destination="J3B-Ru-4wQ" id="EZA-Ph-atu"/>
+                            <outlet property="scoreView" destination="kQl-K3-BHs" id="Cbp-bo-u5j"/>
                         </connections>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

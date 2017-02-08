@@ -20,6 +20,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        gameView.makeRoundedCorners()
         game.reset()
     }
 
@@ -47,18 +48,19 @@ extension GameViewController: GameDelegate {
     func stateChanged(x: Int, y: Int, state: Game.TileState) {
 
         let tag = tagForCoordinates(x: x, y: y)
+        let tileView = gameView.tileViewForTag(tag: tag)
 
         print("\t\t\tSTATE CHANGED state: \(state), x: \(x), y: \(y) -> tag: \(tag)")
 
         switch state {
         case .empty:
-            gameView.setTileEmpty(tag: tag)
+            tileView.setEmpty()
         case .owned(let player) where player == .playerA:
-            gameView.setTileOwnedByPlayerA(tag: tag)
+            tileView.setOwnedByPlayerA()
         case .owned:
-            gameView.setTileOwnedByPlayerB(tag: tag)
+            tileView.setOwnedByPlayerB()
         case .destroyed:
-            gameView.setTileDestroyed(tag: tag)
+            tileView.setDestroyed()
         }
     }
 

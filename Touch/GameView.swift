@@ -17,37 +17,37 @@ class GameView: UIView {
     @IBOutlet var indicatorA: UIView!
     @IBOutlet var indicatorB: UIView!
 
+    @IBOutlet var gridView: UIView!
+    @IBOutlet var scoreView: UIView!
+    
 
-    private func tileViewForTag(tag: Int) -> TileView {
+    func tileViewForTag(tag: Int) -> TileView {
 
         return viewWithTag(tag)!.superview as! TileView
     }
 
 
-    func setTileEmpty(tag: Int) {
+    func makeRoundedCorners() {
 
-        tileViewForTag(tag: tag).setEmpty()
+        for tag in (1...49) {
+            tileViewForTag(tag: tag).layer.cornerRadius = 8
+        }
+
+        gridView.layer.cornerRadius = 8
+
+        scoreView.layer.cornerRadius = 8
+
+        labelScoreA.layer.masksToBounds = true
+        labelScoreB.layer.masksToBounds = true
+
+        labelScoreA.layer.cornerRadius = 6
+        labelScoreB.layer.cornerRadius = 6
+
+        indicatorA.layer.cornerRadius = 4
+        indicatorB.layer.cornerRadius = 4
     }
 
-
-    func setTileOwnedByPlayerA(tag: Int) {
-
-        tileViewForTag(tag: tag).setOwnedByPlayerA()
-    }
-
-
-    func setTileOwnedByPlayerB(tag: Int) {
-
-        tileViewForTag(tag: tag).setOwnedByPlayerB()
-    }
-
-
-    func setTileDestroyed(tag: Int) {
-
-        tileViewForTag(tag: tag).setDestroyed()
-    }
-
-
+    
     func setTurnIndicatorPlayerA() {
 
         indicatorA.alpha = 1
