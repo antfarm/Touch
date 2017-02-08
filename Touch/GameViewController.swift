@@ -14,6 +14,9 @@ class GameViewController: UIViewController {
 
     var gameView: GameView { return view as! GameView }
 
+    var alertMessage: String?
+
+
     override var prefersStatusBarHidden: Bool { return true }
 
 
@@ -39,6 +42,24 @@ class GameViewController: UIViewController {
         print("NEW GAME")
 
         game.reset()
+    }
+
+
+
+    func showModalAlert(message: String) {
+
+        alertMessage = message
+        performSegue(withIdentifier: "modalAlertSegue", sender: nil)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "modalAlertSegue" {
+
+            if let alertVC = segue.destination as? AlertViewController {
+                alertVC.message = alertMessage!
+            }
+        }
     }
 }
 
@@ -88,18 +109,18 @@ extension GameViewController: GameDelegate {
 
     func invalidMove(x: Int, y: Int) {
 
-        print("\t\tINVALID MOVE x: \(x), y: \(y)")
+        showModalAlert(message: "INVALID MOVE!\nx: \(x), y: \(y)")
     }
 
 
     func gameOver(score: [Game.Player : Int]) {
 
         if score[.playerA]! == score[.playerB]! {
-            print("\tDRAW")
+            showModalAlert(message: "GAME OVER!\nDRAW")
         }
         else {           
             let winner: Game.Player = (score[.playerA]! > score[.playerB]! ? .playerA : .playerB)
-            print("\t\(winner.rawValue) WINS")
+            showModalAlert(message: "GAME OVER!\n\(winner.rawValue) WINS")
         }
     }
 }
