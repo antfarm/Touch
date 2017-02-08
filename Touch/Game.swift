@@ -71,8 +71,6 @@ class Game {
         score = [.playerA: 0, .playerB: 0]
         delegate?.scoreChanged(score: score)
 
-//        occupiedTiles = []
-
         for x in (0..<7) {
             for y in (0..<7) {
                 setTileState(x: x, y: y, state: .empty)
