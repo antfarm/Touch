@@ -1020,7 +1020,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="lRo-bs-PWI"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
                                 <state key="normal" title="New Game">
                                     <color key="titleColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -1043,9 +1043,10 @@
                             <constraint firstItem="0pr-w0-iLe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="sGw-n2-fwx"/>
                             <constraint firstItem="fAH-bP-Bc1" firstAttribute="top" secondItem="0pr-w0-iLe" secondAttribute="bottom" constant="40" id="txY-dV-xtc"/>
                             <constraint firstItem="0pr-w0-iLe" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="xOH-E4-dNF"/>
-                            <constraint firstItem="kQl-K3-BHs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="yED-b7-mbS"/>
+                            <constraint firstItem="kQl-K3-BHs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="yED-b7-mbS"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="indicatorA" destination="4sa-PH-m8k" id="WkG-Ig-tu7"/>
                         <outlet property="indicatorB" destination="zXR-0O-lEb" id="psi-r5-ath"/>

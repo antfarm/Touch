@@ -29,6 +29,7 @@ class Game {
         case playerB = "B"
     }
 
+
     enum TileState {
 
         case empty
@@ -39,27 +40,36 @@ class Game {
 
     var delegate: GameDelegate?
 
+    private var currentPlayer: Player! {
+        didSet { delegate?.currentPlayerChanged(player: currentPlayer) }
+    }
+
+    private var opponent: Player {
+        return currentPlayer == .playerA ? .playerB : .playerA
+    }
+
+    private var score: [Player:Int]!
 
     private var grid: [[TileState]] = Array(repeating: Array(repeating: .empty, count: 7), count: 7)
 
-    private var score: [Player:Int] = [.playerA: 0, .playerB: 0]
+    private var previousMove: (x: Int, y: Int)?
+
+    private var occupiedTiles: Set<Int> = []
 
 
-    private(set) var currentPlayer: Player = .playerA {
-        didSet {
-            delegate?.currentPlayerChanged(player: currentPlayer)
-        }
+    init() {
+        reset()
     }
 
-
+    
     func reset() {
-
-        print("INIT NEW GAME")
 
         currentPlayer = .playerA
 
         score = [.playerA: 0, .playerB: 0]
         delegate?.scoreChanged(score: score)
+
+//        occupiedTiles = []
 
         for x in (0..<7) {
             for y in (0..<7) {
@@ -69,66 +79,109 @@ class Game {
     }
 
 
+    func makeMove(x: Int, y: Int) {
+
+        let currentState = grid[x][y]
+
+        switch currentState {
+        case .empty:
+            print("\tEMPTY -> CLAIM")
+
+            claimNeighborhoodForPlayer(x: x, y: y, player: currentPlayer)
+
+            finishMove(x: x, y: y)
+
+        case .owned(let player) where player == opponent:
+            print("\tOWNED BY OPPONENT -> CLAIM")
+
+            if let (previousX, previousY) = previousMove {
+                guard x != previousX || y != previousY else {
+                    print("\tOPPONENT'S PREVIOUS MOVE -> ILLEGAL MOVE")
+
+                    delegate?.invalidMove(x: x, y: y)
+                    return
+                }
+            }
+
+            claimNeighborhoodForPlayer(x: x, y: y, player: currentPlayer)
+
+            finishMove(x: x, y: y)
+
+        case .owned:
+            print("\tOWNED BY PLAYER -> ILLEGAL MOVE")
+
+            delegate?.invalidMove(x: x, y: y)
+
+        case .destroyed:
+            print("\tDESTROYED -> ILLEGAL MOVE")
+
+            delegate?.invalidMove(x: x, y: y)
+        }
+    }
+
+
+    private func claimNeighborhoodForPlayer(x: Int, y: Int, player: Player) {
+
+        for (x, y) in neighborhoodCoordinates(x: x, y: y) {
+            claimTileForPlayer(x: x, y: y, player: player)
+        }
+    }
+    
+    
+    private func finishMove(x: Int, y: Int) {
+
+        previousMove = (x: x, y: y)
+
+        currentPlayer = currentPlayer == .playerA ? .playerB : .playerA
+
+        delegate?.scoreChanged(score: score)
+
+        if occupiedTiles.count == 49 {
+            print("GAME OVER!")
+        }
+    }
+    
+    
+    func claimTileForPlayer(x: Int, y: Int, player: Player) {
+
+        let currentState = grid[x][y]
+
+        switch currentState {
+        case .empty:
+            print("\t\tEMPTY -> OCCUPY")
+
+            setTileState(x: x, y: y, state: .owned(by: player))
+            score[currentPlayer]! += 1
+
+        case .owned(let player) where player == opponent:
+            print("\t\tOWNED BY OPPONENT -> DESTROY")
+
+            setTileState(x: x, y: y, state: .destroyed)
+            score[opponent]! -= 1
+
+        case .owned:
+            print("\t\tOWNED BY PLAYER -> .")
+
+        case .destroyed:
+            print("\t\tDESTROYED -> .")
+        }
+    }
+
+
     private func setTileState(x: Int, y: Int, state: TileState) {
 
         grid[x][y] = state
 
         delegate?.stateChanged(x: x, y: y, state: state)
-    }
 
+        let index = x + y * 7
 
-
-    func claimTileForPlayer(x: Int, y: Int, player: Player) {
-
-        switch grid[x][y] {
+        switch state {
         case .empty:
-
-            score[currentPlayer]! += 1
-
-            setTileState(x: x, y: y, state: .owned(by: player))
-            print("SET \(currentPlayer)")
-
-        case .owned(let player):
-
-            let opponent: Player = currentPlayer == .playerA ? .playerB : .playerA
-
-            if player == opponent {
-                score[opponent]! -= 1
-
-                setTileState(x: x, y: y, state: .destroyed)
-                print("OWNED BY \(player) -> DESTROY")
-            }
-
-        case .destroyed:
-
-            delegate?.invalidMove(x: x, y: y)
-
-            print("ILLEGAL MOVE")
+            occupiedTiles.remove(index)
+        default:
+            occupiedTiles.insert(index)
         }
-    }
-
-
-    func makeMove(x: Int, y: Int) {
-
-        switch grid[x][y] {
-        case .empty:
-
-            for (x, y) in neighborhoodCoordinates(x: x, y: y) {
-                claimTileForPlayer(x: x, y: y, player: currentPlayer)
-            }
-
-        case .owned(let by):
-            delegate?.invalidMove(x: x, y: y)
-            print("OWNED BY \(by)")
-
-        case .destroyed:
-            delegate?.invalidMove(x: x, y: y)
-            print("ILLEGAL MOVE")
-        }
-
-        currentPlayer = currentPlayer == .playerA ? .playerB : .playerA
-
-        delegate?.scoreChanged(score: score)
     }
 
 

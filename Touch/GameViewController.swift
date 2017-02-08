@@ -28,7 +28,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        indicatorB.alpha = 0
+        game.reset()
     }
 
 
@@ -42,7 +42,7 @@ class GameViewController: UIViewController {
         let (x, y) = coordinates(tag: button.tag)
         let t = tag(x: x, y: y)
 
-        print("[\(x) | \(y)] \(t)")
+        print("\nTILE TOUCHED x: \(x), y: \(y), tag: \(t)")
 
         game.makeMove(x: x, y: y)
     }
@@ -53,7 +53,7 @@ extension GameViewController: GameDelegate {
 
     func stateChanged(x: Int, y: Int, state: Game.TileState) {
 
-        print("STATE CHANGED")
+        print("\t\t\tSTATE CHANGED x: \(x), y: \(y), state: \(state)")
 
         if let view = self.view.viewWithTag(tag(x: x, y: y))?.superview {
 
@@ -65,7 +65,7 @@ extension GameViewController: GameDelegate {
             case .owned(let player):
                 color = player == Game.Player.playerA ? UIColor.yellow : UIColor.orange
             case .destroyed:
-                color = UIColor.gray
+                color = UIColor(white: 1, alpha: 0.8)
             }
 
             view.backgroundColor = color
@@ -75,7 +75,7 @@ extension GameViewController: GameDelegate {
 
     func currentPlayerChanged(player: Game.Player) {
 
-        print ("PLAYER CHANGED")
+        print ("PLAYER CHANGED: \(player.rawValue)")
 
         switch player {
 
@@ -92,7 +92,8 @@ extension GameViewController: GameDelegate {
 
     func scoreChanged(score: [Game.Player:Int]) {
 
-        print("SCORE CHANGED")
+        print("SCORE CHANGED: \(score[Game.Player.playerA]!) - \(score[Game.Player.playerB]!)")
+
         labelScoreA.text = "\(score[Game.Player.playerA]!)"
         labelScoreB.text = "\(score[Game.Player.playerB]!)"
     }
@@ -100,6 +101,7 @@ extension GameViewController: GameDelegate {
 
     func invalidMove(x: Int, y: Int) {
 
+        print("\t\tINVALID MOVE x: \(x), y: \(y)")
     }
 }
 
