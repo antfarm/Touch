@@ -14,6 +14,7 @@
 		1465C6771E49EA2C003EE7BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1465C6751E49EA2C003EE7BC /* LaunchScreen.storyboard */; };
 		1465C6821E49EA2C003EE7BC /* TouchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465C6811E49EA2C003EE7BC /* TouchTests.swift */; };
 		1465C68D1E49EA2C003EE7BC /* TouchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465C68C1E49EA2C003EE7BC /* TouchUITests.swift */; };
+		14A2A6C51E4B2DEA00CB6891 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A2A6C41E4B2DEA00CB6891 /* TileView.swift */; };
 		14EFBFF61E4A15CD009F121F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFBFF51E4A15CD009F121F /* Game.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 		1465C6881E49EA2C003EE7BC /* TouchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TouchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1465C68C1E49EA2C003EE7BC /* TouchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchUITests.swift; sourceTree = "<group>"; };
 		1465C68E1E49EA2C003EE7BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14A2A6C41E4B2DEA00CB6891 /* TileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		14EFBFF51E4A15CD009F121F /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 				1465C66C1E49EA2C003EE7BC /* AppDelegate.swift */,
 				1465C66E1E49EA2C003EE7BC /* GameViewController.swift */,
 				14EFBFF51E4A15CD009F121F /* Game.swift */,
+				14A2A6C41E4B2DEA00CB6891 /* TileView.swift */,
 				1465C69A1E49F41A003EE7BC /* UI */,
 				1465C6731E49EA2C003EE7BC /* Assets.xcassets */,
 				1465C6781E49EA2C003EE7BC /* Info.plist */,
@@ -275,6 +278,7 @@
 			files = (
 				1465C66F1E49EA2C003EE7BC /* GameViewController.swift in Sources */,
 				14EFBFF61E4A15CD009F121F /* Game.swift in Sources */,
+				14A2A6C51E4B2DEA00CB6891 /* TileView.swift in Sources */,
 				1465C66D1E49EA2C003EE7BC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

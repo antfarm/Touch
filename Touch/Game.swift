@@ -18,6 +18,8 @@ protocol GameDelegate {
     func scoreChanged(score: [Game.Player:Int])
 
     func invalidMove(x: Int, y: Int)
+
+    func gameOver(score: [Game.Player:Int])
 }
 
 
@@ -87,7 +89,7 @@ class Game {
         case .empty:
             print("\tEMPTY -> CLAIM")
 
-            claimNeighborhoodForPlayer(x: x, y: y, player: currentPlayer)
+            claimNeighborhoodTilesForPlayer(x: x, y: y, player: currentPlayer)
 
             finishMove(x: x, y: y)
 
@@ -103,7 +105,7 @@ class Game {
                 }
             }
 
-            claimNeighborhoodForPlayer(x: x, y: y, player: currentPlayer)
+            claimNeighborhoodTilesForPlayer(x: x, y: y, player: currentPlayer)
 
             finishMove(x: x, y: y)
 
@@ -120,7 +122,7 @@ class Game {
     }
 
 
-    private func claimNeighborhoodForPlayer(x: Int, y: Int, player: Player) {
+    private func claimNeighborhoodTilesForPlayer(x: Int, y: Int, player: Player) {
 
         for (x, y) in neighborhoodCoordinates(x: x, y: y) {
             claimTileForPlayer(x: x, y: y, player: player)
@@ -138,6 +140,8 @@ class Game {
 
         if occupiedTiles.count == 49 {
             print("GAME OVER!")
+
+            delegate?.gameOver(score: score)
         }
     }
     

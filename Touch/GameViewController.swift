@@ -18,12 +18,6 @@ class GameViewController: UIViewController {
     @IBOutlet var indicatorA: UIView!
     @IBOutlet var indicatorB: UIView!
 
-    @IBAction func newGame(_ sender: UIButton) {
-        print("NEW GAME")
-
-        game.reset()
-    }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +40,13 @@ class GameViewController: UIViewController {
 
         game.makeMove(x: x, y: y)
     }
+
+
+    @IBAction func newGame(_ sender: UIButton) {
+        print("NEW GAME")
+
+        game.reset()
+    }
 }
 
 
@@ -55,20 +56,18 @@ extension GameViewController: GameDelegate {
 
         print("\t\t\tSTATE CHANGED x: \(x), y: \(y), state: \(state)")
 
-        if let view = self.view.viewWithTag(tag(x: x, y: y))?.superview {
+        let buttonTag = tag(x: x, y: y)
+        let tileView = self.view.viewWithTag(buttonTag)!.superview as! TileView
 
-            let color: UIColor
-
-            switch state {
-            case .empty:
-                color = UIColor.white
-            case .owned(let player):
-                color = player == Game.Player.playerA ? UIColor.yellow : UIColor.orange
-            case .destroyed:
-                color = UIColor(white: 1, alpha: 0.8)
-            }
-
-            view.backgroundColor = color
+        switch state {
+        case .empty:
+            tileView.setEmpty()
+        case .owned(let player) where player == .playerA:
+            tileView.setOwnedByPlayerA()
+        case .owned:
+            tileView.setOwnedByPlayerB()
+        case .destroyed:
+            tileView.setDestroyed()
         }
     }
 
@@ -90,18 +89,30 @@ extension GameViewController: GameDelegate {
     }
 
 
-    func scoreChanged(score: [Game.Player:Int]) {
+    func scoreChanged(score: [Game.Player : Int]) {
 
-        print("SCORE CHANGED: \(score[Game.Player.playerA]!) - \(score[Game.Player.playerB]!)")
+        print("SCORE CHANGED: \(score[.playerA]!) - \(score[.playerB]!)")
 
-        labelScoreA.text = "\(score[Game.Player.playerA]!)"
-        labelScoreB.text = "\(score[Game.Player.playerB]!)"
+        labelScoreA.text = "\(score[.playerA]!)"
+        labelScoreB.text = "\(score[.playerB]!)"
     }
 
 
     func invalidMove(x: Int, y: Int) {
 
         print("\t\tINVALID MOVE x: \(x), y: \(y)")
+    }
+
+
+    func gameOver(score: [Game.Player : Int]) {
+
+        if score[.playerA]! == score[.playerB]! {
+            print("\tDRAW")
+        }
+        else {           
+            let winner: Game.Player = (score[.playerA]! > score[.playerB]! ? .playerA : .playerB)
+            print("\t\(winner.rawValue) WINS")
+        }
     }
 }
 
