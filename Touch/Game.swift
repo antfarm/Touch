@@ -17,7 +17,7 @@ protocol GameDelegate {
 
     func scoreChanged(score: [Game.Player:Int])
 
-    func invalidMove(x: Int, y: Int)
+    func invalidMove(x: Int, y: Int, reason: Game.InvalidMoveReason)
 
     func gameOver(score: [Game.Player:Int])
 }
@@ -37,6 +37,14 @@ class Game {
         case empty
         case owned(by: Player)
         case destroyed
+    }
+
+
+    enum InvalidMoveReason {
+
+        case owned
+        case destroyed
+        case copy
     }
 
 
@@ -98,7 +106,7 @@ class Game {
                 guard x != previousX || y != previousY else {
                     print("\tOPPONENT'S PREVIOUS MOVE -> ILLEGAL MOVE")
 
-                    delegate?.invalidMove(x: x, y: y)
+                    delegate?.invalidMove(x: x, y: y, reason: .copy)
                     return
                 }
             }
@@ -110,12 +118,12 @@ class Game {
         case .owned:
             print("\tOWNED BY PLAYER -> ILLEGAL MOVE")
 
-            delegate?.invalidMove(x: x, y: y)
+            delegate?.invalidMove(x: x, y: y, reason: .owned)
 
         case .destroyed:
             print("\tDESTROYED -> ILLEGAL MOVE")
 
-            delegate?.invalidMove(x: x, y: y)
+            delegate?.invalidMove(x: x, y: y, reason: .destroyed)
         }
     }
 

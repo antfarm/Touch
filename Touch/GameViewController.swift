@@ -110,10 +110,18 @@ extension GameViewController: GameDelegate {
     }
 
 
-    func invalidMove(x: Int, y: Int) {
+    func invalidMove(x: Int, y: Int, reason: Game.InvalidMoveReason) {
 
-        print("\t\tINVALID MOVE x: \(x), y: \(y)")
-        showModalAlert(message: "INVALID MOVE!\nx: \(x), y: \(y)")
+        print("\t\tINVALID MOVE x: \(x), y: \(y), reason: \(reason)")
+
+        switch reason {
+        case .owned:
+            showModalAlert(message: "You already own this tile.")
+        case .destroyed:
+            showModalAlert(message: "You cannot claim a destroyed tile.")
+        case .copy:
+            showModalAlert(message: "You are not allowed to copy your opponent's previous move.")
+        }
     }
 
 
@@ -121,12 +129,12 @@ extension GameViewController: GameDelegate {
 
         if score[.playerA]! == score[.playerB]! {
             print("\tDRAW")
-            showModalAlert(message: "GAME OVER!\nDRAW")
+            showModalAlert(message: "Game over!\nIt's a draw!")
         }
         else {           
             let winner: Game.Player = (score[.playerA]! > score[.playerB]! ? .playerA : .playerB)
             print("\t\(winner.rawValue) WINS")
-            showModalAlert(message: "GAME OVER!\n\(winner.rawValue) WINS")
+            showModalAlert(message: "Game over!\nPlayer \(winner.rawValue) wins.")
         }
     }
 }
