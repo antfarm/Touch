@@ -24,6 +24,6 @@ class TileView: UIView {
     }
 
     func setDestroyed() {
-        backgroundColor = UIColor(white: 1, alpha: 0.8)
+        backgroundColor = UIColor(white: 1, alpha: 0.6)
     }
 }

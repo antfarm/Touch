@@ -27,8 +27,6 @@ class GameViewController: UIViewController {
         if Config.UI.roundedCorners {
             gameView.makeRoundedCorners()
         }
-
-        game.reset()
     }
 
 
@@ -42,11 +40,16 @@ class GameViewController: UIViewController {
     }
 
 
+    @IBAction func showMenu(_ sender: Any) {
+
+        dismiss(animated: false, completion: nil)
+    }
+
+
     @IBAction func newGame(_ sender: UIButton) {
 
         showModalAlert(message: "Game over!\nYou resigned.") { self.game.reset() }
     }
-
 }
 
 

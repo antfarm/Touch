@@ -87,6 +87,18 @@ class Game {
     }
 
 
+    func sendFullState() {
+
+        for x in (0..<7) {
+            for y in (0..<7) {
+                delegate?.stateChanged(x: x, y: y, state:grid[x][y])
+            }
+        }
+
+        delegate?.currentPlayerChanged(player: currentPlayer)
+        delegate?.scoreChanged(score: score)
+    }
+
     func makeMove(x: Int, y: Int) {
 
         let currentState = grid[x][y]
