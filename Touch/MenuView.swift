@@ -22,6 +22,10 @@ class MenuView: UIView {
 
     func setPlayButtonTitle(title: String) {
 
-        playButton.setTitle(title, for: .normal)
+        UIView.performWithoutAnimation {
+            playButton.setTitle(title, for: .normal)
+            playButton.layoutIfNeeded()
+        }
+
     }
 }
