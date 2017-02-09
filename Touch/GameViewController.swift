@@ -43,33 +43,10 @@ class GameViewController: UIViewController {
 
 
     @IBAction func newGame(_ sender: UIButton) {
-        print("NEW GAME")
 
-        game.reset()
+        showModalAlert(message: "Game over!\nYou resigned.") { self.game.reset() }
     }
 
-
-
-    func showModalAlert(message: String, completion: (() -> ())? = nil) {
-
-        alertMessage = message
-        alertCompletion = completion
-
-        performSegue(withIdentifier: "modalAlertSegue", sender: nil)
-    }
-
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if segue.identifier == "modalAlertSegue" {
-
-            if let alertVC = segue.destination as? AlertViewController {
-
-                alertVC.message = alertMessage!
-                alertVC.completion = alertCompletion
-            }
-        }
-    }
 }
 
 
@@ -141,6 +118,31 @@ extension GameViewController: GameDelegate {
             let winner: Game.Player = (score[.playerA]! > score[.playerB]! ? .playerA : .playerB)
             print("\t\(winner.rawValue) WINS")
             showModalAlert(message: "Game over!\nPlayer \(winner.rawValue) wins.") { self.game.reset() }
+        }
+    }
+}
+
+
+extension GameViewController {
+
+    func showModalAlert(message: String, completion: (() -> ())? = nil) {
+
+        alertMessage = message
+        alertCompletion = completion
+
+        performSegue(withIdentifier: "modalAlertSegue", sender: nil)
+    }
+
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "modalAlertSegue" {
+
+            if let alertVC = segue.destination as? AlertViewController {
+
+                alertVC.message = alertMessage!
+                alertVC.completion = alertCompletion
+            }
         }
     }
 }
