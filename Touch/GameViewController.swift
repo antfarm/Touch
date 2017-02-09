@@ -109,6 +109,7 @@ extension GameViewController: GameDelegate {
 
     func invalidMove(x: Int, y: Int) {
 
+        print("\t\tINVALID MOVE x: \(x), y: \(y)")
         showModalAlert(message: "INVALID MOVE!\nx: \(x), y: \(y)")
     }
 
@@ -116,10 +117,12 @@ extension GameViewController: GameDelegate {
     func gameOver(score: [Game.Player : Int]) {
 
         if score[.playerA]! == score[.playerB]! {
+            print("\tDRAW")
             showModalAlert(message: "GAME OVER!\nDRAW")
         }
         else {           
             let winner: Game.Player = (score[.playerA]! > score[.playerB]! ? .playerA : .playerB)
+            print("\t\(winner.rawValue) WINS")
             showModalAlert(message: "GAME OVER!\n\(winner.rawValue) WINS")
         }
     }
