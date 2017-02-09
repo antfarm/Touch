@@ -71,8 +71,6 @@ extension MenuViewController {
                 game!.sendFullState()
 
                 gameVC.game = game
-
-                menuView.setPlayButtonTitle(title: "")
             }
         }
     }
