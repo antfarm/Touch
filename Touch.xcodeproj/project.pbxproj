@@ -20,6 +20,7 @@
 		14A2A6C91E4B3C3600CB6891 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A2A6C81E4B3C3600CB6891 /* GameView.swift */; };
 		14AD41671E4C602700E9D1A6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD41661E4C602700E9D1A6 /* Config.swift */; };
 		14AD41691E4C7EA500E9D1A6 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD41681E4C7EA500E9D1A6 /* MenuViewController.swift */; };
+		14AD416B1E4C903B00E9D1A6 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD416A1E4C903B00E9D1A6 /* MenuView.swift */; };
 		14EFBFF61E4A15CD009F121F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFBFF51E4A15CD009F121F /* Game.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		14A2A6C81E4B3C3600CB6891 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		14AD41661E4C602700E9D1A6 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		14AD41681E4C7EA500E9D1A6 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		14AD416A1E4C903B00E9D1A6 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		14EFBFF51E4A15CD009F121F /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,6 +158,7 @@
 				14A2A6C81E4B3C3600CB6891 /* GameView.swift */,
 				14A2A6C41E4B2DEA00CB6891 /* TileView.swift */,
 				14899BEE1E4C4D090012F4D9 /* AlertView.swift */,
+				14AD416A1E4C903B00E9D1A6 /* MenuView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				14899BEF1E4C4D090012F4D9 /* AlertView.swift in Sources */,
 				14EFBFF61E4A15CD009F121F /* Game.swift in Sources */,
 				14AD41691E4C7EA500E9D1A6 /* MenuViewController.swift in Sources */,
+				14AD416B1E4C903B00E9D1A6 /* MenuView.swift in Sources */,
 				14A2A6C51E4B2DEA00CB6891 /* TileView.swift in Sources */,
 				14AD41671E4C602700E9D1A6 /* Config.swift in Sources */,
 				1465C66D1E49EA2C003EE7BC /* AppDelegate.swift in Sources */,

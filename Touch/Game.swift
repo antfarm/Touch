@@ -66,6 +66,14 @@ class Game {
 
     private var occupiedTiles: Set<Int> = []
 
+    private(set) var isOver: Bool = false {
+        didSet {
+            if isOver {
+                delegate?.gameOver(score: score)
+            }
+        }
+    }
+
 
     init() {
         reset()
@@ -84,6 +92,8 @@ class Game {
                 setTileState(x: x, y: y, state: .empty)
             }
         }
+
+        isOver = false
     }
 
 
@@ -100,6 +110,11 @@ class Game {
     }
 
     func makeMove(x: Int, y: Int) {
+
+        guard !isOver else {
+            delegate?.gameOver(score: score)
+            return
+        }
 
         let currentState = grid[x][y]
 
@@ -159,7 +174,7 @@ class Game {
         if occupiedTiles.count == 49 {
             print("GAME OVER!")
 
-            delegate?.gameOver(score: score)
+            isOver = true
         }
     }
     

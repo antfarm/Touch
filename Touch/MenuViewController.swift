@@ -10,8 +10,9 @@ import UIKit
 
 class MenuViewController: UIViewController {
 
-    var game: Game!
+    var game: Game?
 
+    var menuView: MenuView { return view as! MenuView }
 
     override var prefersStatusBarHidden: Bool { return true }
 
@@ -19,7 +20,21 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        game = Game()
+        if Config.UI.roundedCorners {
+            menuView.makeRoundedCorners()
+        }
+    }
+
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if game == nil || game!.isOver {
+            menuView.setPlayButtonTitle(title: "New Game")
+        }
+        else {
+            menuView.setPlayButtonTitle(title: "Continue Game")
+        }
     }
 
 
@@ -35,10 +50,20 @@ class MenuViewController: UIViewController {
 
             if let gameVC = segue.destination as? GameViewController {
 
-                game.delegate = gameVC
-                game.sendFullState()
+                if game == nil {
+                    game = Game()
+                }
+
+                if game!.isOver {
+                    game!.reset()
+                }
+
+                game!.delegate = gameVC
+                game!.sendFullState()
 
                 gameVC.game = game
+
+                menuView.setPlayButtonTitle(title: "")
             }
         }
     }

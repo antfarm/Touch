@@ -115,12 +115,12 @@ extension GameViewController: GameDelegate {
 
         if score[.playerA]! == score[.playerB]! {
             print("\tDRAW")
-            showModalAlert(message: "Game over!\nIt's a draw!") { self.game.reset() }
+            showModalAlert(message: "Game over!\nIt's a draw!")
         }
         else {           
             let winner: Game.Player = (score[.playerA]! > score[.playerB]! ? .playerA : .playerB)
             print("\t\(winner.rawValue) WINS")
-            showModalAlert(message: "Game over!\nPlayer \(winner.rawValue) wins.") { self.game.reset() }
+            showModalAlert(message: "Game over!\nPlayer \(winner.rawValue) wins.")
         }
     }
 }

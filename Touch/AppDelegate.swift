@@ -16,12 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-//        let gameVC = window?.rootViewController as! GameViewController
-//
-//        let game = Game()
-//        game.delegate = gameVC
-//
-//        gameVC.game = game
+        // let menuVC = window?.rootViewController as! MenuViewController
 
         return true
     }

@@ -19,7 +19,7 @@
                         <viewControllerLayoutGuide type="top" id="mRh-EC-ahm"/>
                         <viewControllerLayoutGuide type="bottom" id="zsk-x3-G9d"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PbV-RS-bT4" userLabel="Menu View">
+                    <view key="view" contentMode="scaleToFill" id="PbV-RS-bT4" userLabel="Menu View" customClass="MenuView" customModule="Touch" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -44,6 +44,9 @@
                             <constraint firstItem="YYw-pc-nlD" firstAttribute="centerX" secondItem="PbV-RS-bT4" secondAttribute="centerX" id="a4m-U7-fjG"/>
                             <constraint firstItem="YYw-pc-nlD" firstAttribute="centerY" secondItem="PbV-RS-bT4" secondAttribute="centerY" id="xjz-rl-1Zy"/>
                         </constraints>
+                        <connections>
+                            <outlet property="playButton" destination="YYw-pc-nlD" id="SV5-Sk-2D6"/>
+                        </connections>
                     </view>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="showGameSegue" animates="NO" id="Plp-vn-5Tn"/>
