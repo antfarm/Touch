@@ -40,6 +40,15 @@ class MenuViewController: UIViewController {
 
     @IBAction func showGame(_ sender: UIButton) {
 
+        showGame()
+    }
+}
+
+
+extension MenuViewController {
+
+    func showGame() {
+
         performSegue(withIdentifier: "showGameSegue", sender: nil)
     }
 
@@ -67,5 +76,4 @@ class MenuViewController: UIViewController {
             }
         }
     }
-
 }

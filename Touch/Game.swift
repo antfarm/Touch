@@ -58,6 +58,10 @@ class Game {
         return currentPlayer == .playerA ? .playerB : .playerA
     }
 
+    private(set) var isOver: Bool = false {
+        didSet { if isOver { delegate?.gameOver(score: score) } }
+    }
+
     private var score: [Player:Int]!
 
     private var grid: [[TileState]] = Array(repeating: Array(repeating: .empty, count: 7), count: 7)
@@ -66,13 +70,7 @@ class Game {
 
     private var occupiedTiles: Set<Int> = []
 
-    private(set) var isOver: Bool = false {
-        didSet {
-            if isOver {
-                delegate?.gameOver(score: score)
-            }
-        }
-    }
+    let coordinates = (0..<7).flatMap { (x) in (0..<7).map { (y) in (x: x, y: y) } }
 
 
     init() {
@@ -82,32 +80,28 @@ class Game {
     
     func reset() {
 
+        isOver = false
         currentPlayer = .playerA
 
         score = [.playerA: 0, .playerB: 0]
         delegate?.scoreChanged(score: score)
 
-        for x in (0..<7) {
-            for y in (0..<7) {
-                setTileState(x: x, y: y, state: .empty)
-            }
+        for (x, y) in coordinates {
+            setTileState(x: x, y: y, state: .empty)
         }
-
-        isOver = false
     }
 
 
     func sendFullState() {
 
-        for x in (0..<7) {
-            for y in (0..<7) {
-                delegate?.stateChanged(x: x, y: y, state:grid[x][y])
-            }
+        for (x, y) in coordinates {
+            delegate?.stateChanged(x: x, y: y, state:grid[x][y])
         }
 
         delegate?.currentPlayerChanged(player: currentPlayer)
         delegate?.scoreChanged(score: score)
     }
+
 
     func makeMove(x: Int, y: Int) {
 
