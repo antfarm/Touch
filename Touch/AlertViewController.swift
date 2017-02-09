@@ -6,16 +6,17 @@
 //  Copyright © 2017 antfarm. All rights reserved.
 //
 
+// cf. http://stackoverflow.com/a/25325168/5907161
+
 import UIKit
+
 
 class AlertViewController: UIViewController {
 
     var message: String!
 
-    @IBOutlet var alertView: UIView!
-    @IBOutlet var okButton: UIButton!
-    @IBOutlet var labelMessage: UILabel!
-
+    var alertView: AlertView { return view as! AlertView }
+    
 
     override var prefersStatusBarHidden: Bool { return true }
 
@@ -23,13 +24,11 @@ class AlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        alertView.layer.cornerRadius = 8
-        okButton.layer.cornerRadius = 8
+        if Config.UI.roundedCorners {
+            alertView.makeRoundedCorners()
+        }
 
-        labelMessage.layer.masksToBounds = true
-        labelMessage.layer.cornerRadius = 8
-
-        labelMessage.text = message
+        alertView.setText(message: message)
     }
 
 

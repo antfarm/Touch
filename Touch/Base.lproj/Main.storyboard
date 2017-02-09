@@ -30,14 +30,14 @@
                                         <rect key="frame" x="5" y="5" width="278" height="80"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32s-pU-LtS" userLabel="Label A">
-                                                <rect key="frame" x="0.0" y="0.0" width="136.5" height="80"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="137" height="80"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="80"/>
                                                 <color key="textColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3B-Ru-4wQ" userLabel="Label B">
-                                                <rect key="frame" x="141.5" y="0.0" width="136.5" height="80"/>
+                                                <rect key="frame" x="142" y="0.0" width="136" height="80"/>
                                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="80"/>
                                                 <color key="textColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -61,11 +61,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="5"/>
                                         <subviews>
                                             <view tag="-2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4sa-PH-m8k" userLabel="Indicator A">
-                                                <rect key="frame" x="0.0" y="0.0" width="141.5" height="5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="142" height="5"/>
                                                 <color key="backgroundColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view tag="-2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXR-0O-lEb" userLabel="Indicator B">
-                                                <rect key="frame" x="146.5" y="0.0" width="141.5" height="5"/>
+                                                <rect key="frame" x="147" y="0.0" width="141" height="5"/>
                                                 <color key="backgroundColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                         </subviews>
@@ -1056,7 +1056,7 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <segue destination="7Js-eY-hFx" kind="presentation" identifier="modalAlertSegue" id="dUg-WA-cXi"/>
+                        <segue destination="7Js-eY-hFx" kind="presentation" identifier="modalAlertSegue" modalTransitionStyle="crossDissolve" id="dUg-WA-cXi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1071,17 +1071,21 @@
                         <viewControllerLayoutGuide type="top" id="I5U-Pn-RqY"/>
                         <viewControllerLayoutGuide type="bottom" id="SXZ-rr-hwf"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ksx-UI-Wz7">
+                    <view key="view" contentMode="scaleToFill" id="ksx-UI-Wz7" customClass="AlertView" customModule="Touch" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ka-VR-vN4">
+                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bcg-AL-NHc" userLabel="Background View">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ka-VR-vN4" userLabel="Dialog View">
                                 <rect key="frame" x="40" y="194" width="240" height="180"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISp-FF-Bbs">
                                         <rect key="frame" x="46" y="142" width="148" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="OK">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1095,11 +1099,11 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="2c0-Gb-dVm"/>
                                     <constraint firstAttribute="height" constant="180" id="DdK-q7-qRe" userLabel="height = 180"/>
@@ -1108,14 +1112,18 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="3ka-VR-vN4" firstAttribute="centerX" secondItem="ksx-UI-Wz7" secondAttribute="centerX" id="JlS-TT-MPA"/>
+                            <constraint firstItem="SXZ-rr-hwf" firstAttribute="top" secondItem="Bcg-AL-NHc" secondAttribute="bottom" id="XbA-nW-pgU"/>
+                            <constraint firstAttribute="trailing" secondItem="Bcg-AL-NHc" secondAttribute="trailing" id="hbh-M4-4M1"/>
+                            <constraint firstItem="Bcg-AL-NHc" firstAttribute="leading" secondItem="ksx-UI-Wz7" secondAttribute="leading" id="oo2-4D-JSH"/>
                             <constraint firstItem="3ka-VR-vN4" firstAttribute="centerY" secondItem="ksx-UI-Wz7" secondAttribute="centerY" id="pYW-kI-uvN"/>
+                            <constraint firstItem="Bcg-AL-NHc" firstAttribute="top" secondItem="I5U-Pn-RqY" secondAttribute="bottom" id="scl-jE-oTF"/>
                         </constraints>
+                        <connections>
+                            <outlet property="dialogView" destination="3ka-VR-vN4" id="CfQ-uQ-YH3"/>
+                            <outlet property="labelMessage" destination="x94-l5-AgE" id="L90-sz-MY5"/>
+                            <outlet property="okButton" destination="ISp-FF-Bbs" id="gef-LG-spi"/>
+                        </connections>
                     </view>
-                    <connections>
-                        <outlet property="alertView" destination="3ka-VR-vN4" id="1ek-Cj-S4q"/>
-                        <outlet property="labelMessage" destination="x94-l5-AgE" id="vru-wx-HTg"/>
-                        <outlet property="okButton" destination="ISp-FF-Bbs" id="2GU-Ui-4jw"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tkd-mk-lDi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

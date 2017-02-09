@@ -11,10 +11,9 @@ import UIKit
 class GameViewController: UIViewController {
 
     var game: Game!
+    var alertMessage: String?
 
     var gameView: GameView { return view as! GameView }
-
-    var alertMessage: String?
 
 
     override var prefersStatusBarHidden: Bool { return true }
@@ -23,7 +22,10 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        gameView.makeRoundedCorners()
+        if Config.UI.roundedCorners {
+            gameView.makeRoundedCorners()
+        }
+
         game.reset()
     }
 
@@ -51,6 +53,7 @@ class GameViewController: UIViewController {
         alertMessage = message
         performSegue(withIdentifier: "modalAlertSegue", sender: nil)
     }
+
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 

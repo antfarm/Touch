@@ -15,8 +15,10 @@
 		1465C6821E49EA2C003EE7BC /* TouchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465C6811E49EA2C003EE7BC /* TouchTests.swift */; };
 		1465C68D1E49EA2C003EE7BC /* TouchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465C68C1E49EA2C003EE7BC /* TouchUITests.swift */; };
 		14899BED1E4BA6390012F4D9 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14899BEC1E4BA6390012F4D9 /* AlertViewController.swift */; };
+		14899BEF1E4C4D090012F4D9 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14899BEE1E4C4D090012F4D9 /* AlertView.swift */; };
 		14A2A6C51E4B2DEA00CB6891 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A2A6C41E4B2DEA00CB6891 /* TileView.swift */; };
 		14A2A6C91E4B3C3600CB6891 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A2A6C81E4B3C3600CB6891 /* GameView.swift */; };
+		14AD41671E4C602700E9D1A6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD41661E4C602700E9D1A6 /* Config.swift */; };
 		14EFBFF61E4A15CD009F121F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFBFF51E4A15CD009F121F /* Game.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,8 +54,10 @@
 		1465C68C1E49EA2C003EE7BC /* TouchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchUITests.swift; sourceTree = "<group>"; };
 		1465C68E1E49EA2C003EE7BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14899BEC1E4BA6390012F4D9 /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		14899BEE1E4C4D090012F4D9 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		14A2A6C41E4B2DEA00CB6891 /* TileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		14A2A6C81E4B3C3600CB6891 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		14AD41661E4C602700E9D1A6 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		14EFBFF51E4A15CD009F121F /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				1465C66C1E49EA2C003EE7BC /* AppDelegate.swift */,
+				14AD41661E4C602700E9D1A6 /* Config.swift */,
 				14899BE91E4B4F3F0012F4D9 /* Controller */,
 				14899BE81E4B4F270012F4D9 /* Model */,
 				14899BE71E4B4F0B0012F4D9 /* View */,
@@ -148,6 +153,7 @@
 			children = (
 				14A2A6C81E4B3C3600CB6891 /* GameView.swift */,
 				14A2A6C41E4B2DEA00CB6891 /* TileView.swift */,
+				14899BEE1E4C4D090012F4D9 /* AlertView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -308,8 +314,10 @@
 			files = (
 				1465C66F1E49EA2C003EE7BC /* GameViewController.swift in Sources */,
 				14899BED1E4BA6390012F4D9 /* AlertViewController.swift in Sources */,
+				14899BEF1E4C4D090012F4D9 /* AlertView.swift in Sources */,
 				14EFBFF61E4A15CD009F121F /* Game.swift in Sources */,
 				14A2A6C51E4B2DEA00CB6891 /* TileView.swift in Sources */,
+				14AD41671E4C602700E9D1A6 /* Config.swift in Sources */,
 				1465C66D1E49EA2C003EE7BC /* AppDelegate.swift in Sources */,
 				14A2A6C91E4B3C3600CB6891 /* GameView.swift in Sources */,
 			);
