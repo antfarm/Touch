@@ -14,9 +14,10 @@ import UIKit
 class AlertViewController: UIViewController {
 
     var message: String!
+    var completion: (() -> ())?
 
     var alertView: AlertView { return view as! AlertView }
-    
+
 
     override var prefersStatusBarHidden: Bool { return true }
 
@@ -33,8 +34,8 @@ class AlertViewController: UIViewController {
 
 
     @IBAction func okButtonPressed(_ sender: UIButton) {
-        
-        self.dismiss(animated: true, completion: nil)
+
+        self.dismiss(animated: true) { self.completion?() }
     }
 }
 

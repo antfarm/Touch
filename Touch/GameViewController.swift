@@ -11,7 +11,9 @@ import UIKit
 class GameViewController: UIViewController {
 
     var game: Game!
+
     var alertMessage: String?
+    var alertCompletion: (() -> ())?
 
     var gameView: GameView { return view as! GameView }
 
@@ -48,9 +50,11 @@ class GameViewController: UIViewController {
 
 
 
-    func showModalAlert(message: String) {
+    func showModalAlert(message: String, completion: (() -> ())? = nil) {
 
         alertMessage = message
+        alertCompletion = completion
+
         performSegue(withIdentifier: "modalAlertSegue", sender: nil)
     }
 
@@ -60,7 +64,9 @@ class GameViewController: UIViewController {
         if segue.identifier == "modalAlertSegue" {
 
             if let alertVC = segue.destination as? AlertViewController {
+
                 alertVC.message = alertMessage!
+                alertVC.completion = alertCompletion
             }
         }
     }
@@ -129,12 +135,12 @@ extension GameViewController: GameDelegate {
 
         if score[.playerA]! == score[.playerB]! {
             print("\tDRAW")
-            showModalAlert(message: "Game over!\nIt's a draw!")
+            showModalAlert(message: "Game over!\nIt's a draw!") { self.game.reset() }
         }
         else {           
             let winner: Game.Player = (score[.playerA]! > score[.playerB]! ? .playerA : .playerB)
             print("\t\(winner.rawValue) WINS")
-            showModalAlert(message: "Game over!\nPlayer \(winner.rawValue) wins.")
+            showModalAlert(message: "Game over!\nPlayer \(winner.rawValue) wins.") { self.game.reset() }
         }
     }
 }
