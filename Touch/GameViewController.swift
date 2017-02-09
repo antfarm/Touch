@@ -44,12 +44,6 @@ class GameViewController: UIViewController {
 
         dismiss(animated: false, completion: nil)
     }
-
-
-    @IBAction func newGame(_ sender: UIButton) {
-
-        showModalAlert(message: "Game over!\nYou resigned.") { self.game.reset() }
-    }
 }
 
 
