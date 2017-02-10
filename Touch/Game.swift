@@ -79,8 +79,9 @@ class Game {
 
     private var occupiedTiles: Set<Int> = []
 
-    private let coordinates =
+    private lazy var coordinates = {
         (0..<7).flatMap { (x) in (0..<7).map { (y) in (x: x, y: y) } }
+    }()
 
 
     init() {
@@ -190,7 +191,7 @@ class Game {
 
             break
 
-        case .destroyed: print("\t\tDESTROYED -> .")
+        case .destroyed:
 
             break
         }
