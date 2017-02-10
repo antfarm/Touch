@@ -33,9 +33,6 @@ class GameViewController: UIViewController {
     @IBAction func tileTouched(_ button: UIButton) {
 
         let (x, y) = coordinates(tag: button.tag)
-
-        print("\nTILE TOUCHED tag: \(button.tag) -> x: \(x), y: \(y)")
-
         game.makeMove(x: x, y: y)
     }
 
@@ -54,15 +51,16 @@ extension GameViewController: GameDelegate {
         let tag = tagForCoordinates(x: x, y: y)
         let tileView = gameView.tileViewForTag(tag: tag)
 
-        print("\t\t\tTILE CHANGED state: \(state), x: \(x), y: \(y) -> tag: \(tag)")
-
         switch state {
         case .empty:
             tileView.setEmpty()
+
         case .owned(let player) where player == .playerA:
             tileView.setOwnedByPlayerA()
+
         case .owned:
             tileView.setOwnedByPlayerB()
+
         case .destroyed:
             tileView.setDestroyed()
         }
@@ -71,11 +69,10 @@ extension GameViewController: GameDelegate {
 
     func currentPlayerChanged(player: Game.Player) {
 
-        print ("PLAYER CHANGED: \(player.rawValue)")
-
         switch player {
         case .playerA:
             gameView.setTurnIndicatorPlayerA()
+
         case .playerB:
             gameView.setTurnIndicatorPlayerB()
         }
@@ -84,37 +81,33 @@ extension GameViewController: GameDelegate {
 
     func scoreChanged(score: Game.Score) {
 
-        print("SCORE CHANGED: \(score[.playerA]!) - \(score[.playerB]!)")
-
         gameView.setScore(playerA: score[.playerA]!, playerB: score[.playerB]!)
     }
 
 
     func invalidMove(x: Int, y: Int, reason: Game.InvalidMoveReason) {
 
-        print("\t\tINVALID MOVE x: \(x), y: \(y), reason: \(reason)")
-
         switch reason {
         case .owned:
             showModalAlert(message: "You already own this tile.")
+
         case .destroyed:
             showModalAlert(message: "You cannot claim a destroyed tile.")
+
         case .copy:
-            showModalAlert(message: "You are not allowed to copy your opponent's previous move.")
+            showModalAlert(message:
+                "You are not allowed to copy your opponent's previous move.")
         }
     }
 
 
-    func gameOver(score: Game.Score) {
+    func gameOver(winner: Game.Player?) {
 
-        if score[.playerA]! == score[.playerB]! {
-            print("\tDRAW")
-            showModalAlert(message: "Game over!\nIt's a draw!")
+        if let winner = winner {
+            showModalAlert(message: "Game over!\n\(winner.rawValue) wins.")
         }
-        else {           
-            let winner: Game.Player = (score[.playerA]! > score[.playerB]! ? .playerA : .playerB)
-            print("\t\(winner.rawValue) WINS")
-            showModalAlert(message: "Game over!\nPlayer \(winner.rawValue) wins.")
+        else {
+            showModalAlert(message: "Game over!\nIt's a draw!")
         }
     }
 }
@@ -149,9 +142,7 @@ extension GameViewController {
 
     fileprivate func coordinates(tag: Int) -> (x: Int, y: Int) {
 
-        if tag == 49 {
-            return (x: 0, y: 0)
-        }
+        guard tag != 49 else { return (x: 0, y: 0) }
 
         return (x: tag % 7, y: tag / 7)
     }
@@ -159,9 +150,7 @@ extension GameViewController {
 
     fileprivate func tagForCoordinates(x: Int, y: Int) -> Int {
 
-        if x == 0 && y == 0 {
-            return 49
-        }
+        guard (x, y) != (0, 0) else { return 49 }
 
         return x + y * 7
     }

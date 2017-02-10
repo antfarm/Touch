@@ -19,7 +19,7 @@ protocol GameDelegate {
 
     func invalidMove(x: Int, y: Int, reason: Game.InvalidMoveReason)
 
-    func gameOver(score: Game.Score)
+    func gameOver(winner: Game.Player?)
 }
 
 
@@ -62,18 +62,25 @@ class Game {
     }
 
     private(set) var isOver: Bool = false {
-        didSet { if isOver { delegate?.gameOver(score: score) } }
+        didSet { if isOver { delegate?.gameOver(winner: leadingPlayer) } }
+    }
+
+    private var leadingPlayer: Game.Player? {
+        return score[.playerA]! == score[.playerB]! ? nil :
+            score[.playerA]! > score[.playerB]! ? .playerA : .playerB
     }
 
     private var score: [Player: Int]!
 
-    private var tiles: [[TileState]] = Array(repeating: Array(repeating: .empty, count: 7), count: 7)
+    private var tiles: [[TileState]] =
+        Array(repeating: Array(repeating: .empty, count: 7), count: 7)
 
     private var previousMove: (x: Int, y: Int)?
 
     private var occupiedTiles: Set<Int> = []
 
-    private let coordinates = (0..<7).flatMap { (x) in (0..<7).map { (y) in (x: x, y: y) } }
+    private let coordinates =
+        (0..<7).flatMap { (x) in (0..<7).map { (y) in (x: x, y: y) } }
 
 
     init() {
@@ -109,48 +116,39 @@ class Game {
     func makeMove(x: Int, y: Int) {
 
         guard !isOver else {
-            delegate?.gameOver(score: score)
+            delegate?.gameOver(winner: leadingPlayer)
             return
         }
 
         let currentState = tiles[x][y]
 
         switch currentState {
-        case .empty: print("\tEMPTY -> CLAIM")
+        case .empty:
 
-            claimNeighborhoodTilesForPlayer(x: x, y: y, player: currentPlayer)
+            claimNeighborhoodForPlayer(x: x, y: y, player: currentPlayer)
             finishMove(x: x, y: y)
 
-        case .owned(let player) where player == opponent: print("\tOWNED BY OPPONENT -> CLAIM")
+        case .owned(let player) where player == opponent:
 
-            guard previousMove == nil || previousMove! != (x, y) else { print("\tOPPONENT'S PREVIOUS MOVE -> ILLEGAL MOVE")
-
+            guard previousMove == nil || previousMove! != (x, y) else {
                 delegate?.invalidMove(x: x, y: y, reason: .copy)
                 break
             }
 
-            claimNeighborhoodTilesForPlayer(x: x, y: y, player: currentPlayer)
+            claimNeighborhoodForPlayer(x: x, y: y, player: currentPlayer)
             finishMove(x: x, y: y)
 
-        case .owned: print("\tOWNED BY PLAYER -> ILLEGAL MOVE")
+        case .owned:
 
             delegate?.invalidMove(x: x, y: y, reason: .owned)
 
-        case .destroyed: print("\tDESTROYED -> ILLEGAL MOVE")
+        case .destroyed:
 
             delegate?.invalidMove(x: x, y: y, reason: .destroyed)
         }
     }
 
 
-    private func claimNeighborhoodTilesForPlayer(x: Int, y: Int, player: Player) {
-
-        for (x, y) in neighborhoodCoordinates(x: x, y: y) {
-            claimTileForPlayer(x: x, y: y, player: player)
-        }
-    }
-    
-    
     private func finishMove(x: Int, y: Int) {
 
         previousMove = (x: x, y: y)
@@ -159,8 +157,16 @@ class Game {
 
         delegate?.scoreChanged(score: score)
 
-        if occupiedTiles.count == 49 { print("GAME OVER!")
+        if occupiedTiles.count == 49 {
             isOver = true
+        }
+    }
+
+
+    private func claimNeighborhoodForPlayer(x: Int, y: Int, player: Player) {
+
+        for (x, y) in neighborhoodCoordinates(x: x, y: y) {
+            claimTileForPlayer(x: x, y: y, player: player)
         }
     }
     
@@ -170,17 +176,17 @@ class Game {
         let currentState = tiles[x][y]
 
         switch currentState {
-        case .empty: print("\t\tEMPTY -> OCCUPY")
+        case .empty:
 
             setTileState(x: x, y: y, state: .owned(by: player))
             score[currentPlayer]! += 1
 
-        case .owned(let player) where player == opponent: print("\t\tOWNED BY OPPONENT -> DESTROY")
+        case .owned(let player) where player == opponent:
 
             setTileState(x: x, y: y, state: .destroyed)
             score[opponent]! -= 1
 
-        case .owned: print("\t\tOWNED BY PLAYER -> .")
+        case .owned:
 
             break
 
