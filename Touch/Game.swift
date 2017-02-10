@@ -113,36 +113,27 @@ class Game {
         let currentState = grid[x][y]
 
         switch currentState {
-        case .empty:
-            print("\tEMPTY -> CLAIM")
+        case .empty: print("\tEMPTY -> CLAIM")
 
             claimNeighborhoodTilesForPlayer(x: x, y: y, player: currentPlayer)
-
             finishMove(x: x, y: y)
 
-        case .owned(let player) where player == opponent:
-            print("\tOWNED BY OPPONENT -> CLAIM")
+        case .owned(let player) where player == opponent: print("\tOWNED BY OPPONENT -> CLAIM")
 
-            if let (previousX, previousY) = previousMove {
-                guard x != previousX || y != previousY else {
-                    print("\tOPPONENT'S PREVIOUS MOVE -> ILLEGAL MOVE")
+            guard previousMove == nil || previousMove! != (x, y) else { print("\tOPPONENT'S PREVIOUS MOVE -> ILLEGAL MOVE")
 
-                    delegate?.invalidMove(x: x, y: y, reason: .copy)
-                    return
-                }
+                delegate?.invalidMove(x: x, y: y, reason: .copy)
+                break
             }
 
             claimNeighborhoodTilesForPlayer(x: x, y: y, player: currentPlayer)
-
             finishMove(x: x, y: y)
 
-        case .owned:
-            print("\tOWNED BY PLAYER -> ILLEGAL MOVE")
+        case .owned: print("\tOWNED BY PLAYER -> ILLEGAL MOVE")
 
             delegate?.invalidMove(x: x, y: y, reason: .owned)
 
-        case .destroyed:
-            print("\tDESTROYED -> ILLEGAL MOVE")
+        case .destroyed: print("\tDESTROYED -> ILLEGAL MOVE")
 
             delegate?.invalidMove(x: x, y: y, reason: .destroyed)
         }
@@ -165,9 +156,7 @@ class Game {
 
         delegate?.scoreChanged(score: score)
 
-        if occupiedTiles.count == 49 {
-            print("GAME OVER!")
-
+        if occupiedTiles.count == 49 { print("GAME OVER!")
             isOver = true
         }
     }
@@ -178,23 +167,23 @@ class Game {
         let currentState = grid[x][y]
 
         switch currentState {
-        case .empty:
-            print("\t\tEMPTY -> OCCUPY")
+        case .empty: print("\t\tEMPTY -> OCCUPY")
 
             setTileState(x: x, y: y, state: .owned(by: player))
             score[currentPlayer]! += 1
 
-        case .owned(let player) where player == opponent:
-            print("\t\tOWNED BY OPPONENT -> DESTROY")
+        case .owned(let player) where player == opponent: print("\t\tOWNED BY OPPONENT -> DESTROY")
 
             setTileState(x: x, y: y, state: .destroyed)
             score[opponent]! -= 1
 
-        case .owned:
-            print("\t\tOWNED BY PLAYER -> .")
+        case .owned: print("\t\tOWNED BY PLAYER -> .")
 
-        case .destroyed:
-            print("\t\tDESTROYED -> .")
+            break
+
+        case .destroyed: print("\t\tDESTROYED -> .")
+
+            break
         }
     }
 
