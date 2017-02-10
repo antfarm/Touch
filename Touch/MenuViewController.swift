@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import MultipeerConnectivity
+
 
 class MenuViewController: UIViewController {
+
+    var connectivityManager: ConnectivityManager!
 
     var game: Game?
 
@@ -73,5 +77,17 @@ extension MenuViewController {
                 gameVC.game = game
             }
         }
+    }
+}
+
+
+extension MenuViewController: ConnectivityManagerDelegate {
+
+    func connectedDevicesChanged(manager : ConnectivityManager, connectedDevices: [MCPeerID]) {
+
+    }
+
+    func messageReceived(message: String, from: MCPeerID) {
+
     }
 }
