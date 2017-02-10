@@ -11,7 +11,7 @@ import Foundation
 
 protocol GameDelegate {
 
-    func stateChanged(x: Int, y: Int, state: Game.TileState)
+    func tileChanged(x: Int, y: Int, state: Game.TileState)
 
     func currentPlayerChanged(player: Game.Player)
 
@@ -64,7 +64,7 @@ class Game {
 
     private var score: [Player:Int]!
 
-    private var grid: [[TileState]] = Array(repeating: Array(repeating: .empty, count: 7), count: 7)
+    private var tiles: [[TileState]] = Array(repeating: Array(repeating: .empty, count: 7), count: 7)
 
     private var previousMove: (x: Int, y: Int)?
 
@@ -95,7 +95,7 @@ class Game {
     func sendFullState() {
 
         for (x, y) in coordinates {
-            delegate?.stateChanged(x: x, y: y, state:grid[x][y])
+            delegate?.tileChanged(x: x, y: y, state: tiles[x][y])
         }
 
         delegate?.currentPlayerChanged(player: currentPlayer)
@@ -110,7 +110,7 @@ class Game {
             return
         }
 
-        let currentState = grid[x][y]
+        let currentState = tiles[x][y]
 
         switch currentState {
         case .empty: print("\tEMPTY -> CLAIM")
@@ -164,7 +164,7 @@ class Game {
     
     private func claimTileForPlayer(x: Int, y: Int, player: Player) {
 
-        let currentState = grid[x][y]
+        let currentState = tiles[x][y]
 
         switch currentState {
         case .empty: print("\t\tEMPTY -> OCCUPY")
@@ -190,9 +190,9 @@ class Game {
 
     private func setTileState(x: Int, y: Int, state: TileState) {
 
-        grid[x][y] = state
+        tiles[x][y] = state
 
-        delegate?.stateChanged(x: x, y: y, state: state)
+        delegate?.tileChanged(x: x, y: y, state: state)
 
         let index = x + y * 7
 

@@ -49,12 +49,12 @@ class GameViewController: UIViewController {
 
 extension GameViewController: GameDelegate {
 
-    func stateChanged(x: Int, y: Int, state: Game.TileState) {
+    func tileChanged(x: Int, y: Int, state: Game.TileState) {
 
         let tag = tagForCoordinates(x: x, y: y)
         let tileView = gameView.tileViewForTag(tag: tag)
 
-        print("\t\t\tSTATE CHANGED state: \(state), x: \(x), y: \(y) -> tag: \(tag)")
+        print("\t\t\tTILE CHANGED state: \(state), x: \(x), y: \(y) -> tag: \(tag)")
 
         switch state {
         case .empty:
