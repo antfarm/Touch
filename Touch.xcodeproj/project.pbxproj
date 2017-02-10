@@ -115,9 +115,8 @@
 			children = (
 				1465C66C1E49EA2C003EE7BC /* AppDelegate.swift */,
 				14AD41661E4C602700E9D1A6 /* Config.swift */,
-				14899BE91E4B4F3F0012F4D9 /* Controller */,
+				148D588E1E4DE9CA00ED25FC /* Scenes */,
 				14899BE81E4B4F270012F4D9 /* Model */,
-				14899BE71E4B4F0B0012F4D9 /* View */,
 				1465C69A1E49F41A003EE7BC /* UI */,
 				1465C6731E49EA2C003EE7BC /* Assets.xcassets */,
 				1465C6781E49EA2C003EE7BC /* Info.plist */,
@@ -152,17 +151,6 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
-		14899BE71E4B4F0B0012F4D9 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				14A2A6C81E4B3C3600CB6891 /* GameView.swift */,
-				14A2A6C41E4B2DEA00CB6891 /* TileView.swift */,
-				14899BEE1E4C4D090012F4D9 /* AlertView.swift */,
-				14AD416A1E4C903B00E9D1A6 /* MenuView.swift */,
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
 		14899BE81E4B4F270012F4D9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,14 +159,42 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		14899BE91E4B4F3F0012F4D9 /* Controller */ = {
+		148D588B1E4DE96800ED25FC /* Menu */ = {
 			isa = PBXGroup;
 			children = (
 				14AD41681E4C7EA500E9D1A6 /* MenuViewController.swift */,
-				1465C66E1E49EA2C003EE7BC /* GameViewController.swift */,
-				14899BEC1E4BA6390012F4D9 /* AlertViewController.swift */,
+				14AD416A1E4C903B00E9D1A6 /* MenuView.swift */,
 			);
-			name = Controller;
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		148D588C1E4DE96F00ED25FC /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				1465C66E1E49EA2C003EE7BC /* GameViewController.swift */,
+				14A2A6C81E4B3C3600CB6891 /* GameView.swift */,
+				14A2A6C41E4B2DEA00CB6891 /* TileView.swift */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
+		148D588D1E4DE97600ED25FC /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				14899BEC1E4BA6390012F4D9 /* AlertViewController.swift */,
+				14899BEE1E4C4D090012F4D9 /* AlertView.swift */,
+			);
+			name = Alert;
+			sourceTree = "<group>";
+		};
+		148D588E1E4DE9CA00ED25FC /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				148D588B1E4DE96800ED25FC /* Menu */,
+				148D588C1E4DE96F00ED25FC /* Game */,
+				148D588D1E4DE97600ED25FC /* Alert */,
+			);
+			name = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
