@@ -15,15 +15,18 @@ protocol GameDelegate {
 
     func currentPlayerChanged(player: Game.Player)
 
-    func scoreChanged(score: [Game.Player:Int])
+    func scoreChanged(score: Game.Score)
 
     func invalidMove(x: Int, y: Int, reason: Game.InvalidMoveReason)
 
-    func gameOver(score: [Game.Player:Int])
+    func gameOver(score: Game.Score)
 }
 
 
 class Game {
+
+    typealias Score = [Game.Player: Int]
+
 
     enum Player: String {
 
@@ -62,7 +65,7 @@ class Game {
         didSet { if isOver { delegate?.gameOver(score: score) } }
     }
 
-    private var score: [Player:Int]!
+    private var score: [Player: Int]!
 
     private var tiles: [[TileState]] = Array(repeating: Array(repeating: .empty, count: 7), count: 7)
 
@@ -70,7 +73,7 @@ class Game {
 
     private var occupiedTiles: Set<Int> = []
 
-    let coordinates = (0..<7).flatMap { (x) in (0..<7).map { (y) in (x: x, y: y) } }
+    private let coordinates = (0..<7).flatMap { (x) in (0..<7).map { (y) in (x: x, y: y) } }
 
 
     init() {

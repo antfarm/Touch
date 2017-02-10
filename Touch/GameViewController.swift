@@ -82,7 +82,7 @@ extension GameViewController: GameDelegate {
     }
 
 
-    func scoreChanged(score: [Game.Player : Int]) {
+    func scoreChanged(score: Game.Score) {
 
         print("SCORE CHANGED: \(score[.playerA]!) - \(score[.playerB]!)")
 
@@ -105,7 +105,7 @@ extension GameViewController: GameDelegate {
     }
 
 
-    func gameOver(score: [Game.Player : Int]) {
+    func gameOver(score: Game.Score) {
 
         if score[.playerA]! == score[.playerB]! {
             print("\tDRAW")
