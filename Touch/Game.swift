@@ -53,7 +53,7 @@ class Game {
 
     var delegate: GameDelegate?
 
-    private var currentPlayer: Player! {
+    private(set) var currentPlayer: Player! {
         didSet { delegate?.currentPlayerChanged(player: currentPlayer) }
     }
 

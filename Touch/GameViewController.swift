@@ -12,6 +12,12 @@ class GameViewController: UIViewController {
 
     var game: Game!
 
+    var remotePlayer: Game.Player?
+
+    var remoteGameSession: RemoteGameSession? {
+        didSet { remoteGameSession?.delegate = self }
+    }
+
     var alertMessage: String?
     var alertCompletion: (() -> ())?
 
@@ -32,6 +38,11 @@ class GameViewController: UIViewController {
 
     @IBAction func tileTouched(_ button: UIButton) {
 
+        guard remotePlayer == nil || game.currentPlayer != remotePlayer else {
+            showModalAlert(message: "PLease wait for remote opponent's turn!")
+            return
+        }
+
         let (x, y) = coordinates(tag: button.tag)
         game.makeMove(x: x, y: y)
     }
@@ -42,6 +53,21 @@ class GameViewController: UIViewController {
         dismiss(animated: false, completion: nil)
     }
 }
+
+
+extension GameViewController: RemoteGameSessionDelegate {
+
+    func receivedMove(x: Int, y: Int) {
+
+        guard game.currentPlayer == remotePlayer else {
+            print("EROR: Not remote player's turn!")
+            return
+        }
+
+        game.makeMove(x: x, y: y)
+    }
+}
+
 
 
 extension GameViewController: GameDelegate {

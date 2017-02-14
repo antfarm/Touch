@@ -14,9 +14,9 @@ import MultipeerConnectivity
 
 protocol ConnectivityManagerDelegate {
 
-    func connectedDevicesChanged(manager : ConnectivityManager, connectedDevices: [MCPeerID])
+    func connectedDevicesChanged(manager: ConnectivityManager, connectedDevices: [String])
 
-    func messageReceived(message: String, from: MCPeerID)
+    func messageReceived(message: String, from: String)
 }
 
 
@@ -110,7 +110,7 @@ extension ConnectivityManager: MCNearbyServiceBrowserDelegate {
 
     func browser(_ browser: MCNearbyServiceBrowser,
                  foundPeer peerID: MCPeerID,
-                 withDiscoveryInfo info: [String : String]?) {
+                 withDiscoveryInfo info: [String: String]?) {
 
         print("BRWS foundPeer peerID: \(peerID) withDiscoveryInfo info: \(info)")
 
@@ -135,8 +135,10 @@ extension ConnectivityManager: MCSessionDelegate {
 
         print("SESS peer peerId: \(peerID) didChange state: \(state)")
 
+        let displayNames = session.connectedPeers.map { $0.displayName }
+
         delegate?.connectedDevicesChanged(
-            manager: self, connectedDevices: session.connectedPeers)
+            manager: self, connectedDevices: displayNames)
     }
 
 
@@ -147,7 +149,7 @@ extension ConnectivityManager: MCSessionDelegate {
         print("SESS didReceive data: \(data.count) bytes fromPeer peerID: \(peerID)")
 
         if let message = String(data: data, encoding: .utf8) {
-            self.delegate?.messageReceived(message: message, from: peerID)
+            self.delegate?.messageReceived(message: message, from: peerID.displayName)
         }
     }
 
