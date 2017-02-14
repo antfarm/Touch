@@ -8,11 +8,26 @@
 
 import UIKit
 
+
 class MenuViewController: UIViewController {
 
-    var game: Game?
+    enum State {
 
-    var menuView: MenuView { return view as! MenuView }
+        case initial
+        case gameInProgress
+    }
+
+
+    fileprivate var game: Game?
+
+    private var menuView: MenuView { return view as! MenuView }
+
+    private var state: State = .initial {
+        didSet {
+            menuView.showMenuForState(state: state)
+        }
+    }
+
 
     override var prefersStatusBarHidden: Bool { return true }
 
@@ -30,10 +45,10 @@ class MenuViewController: UIViewController {
         super.viewWillAppear(animated)
 
         if game == nil || game!.isOver {
-            menuView.state = .initial
+            state = .initial
         }
         else {
-            menuView.state = .gameInProgress
+            state = .gameInProgress
         }
     }
 

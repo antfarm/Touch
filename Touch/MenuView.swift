@@ -11,34 +11,69 @@ import UIKit
 
 class MenuView: UIView {
 
-    enum State {
-
-        case initial
-        case gameInProgress
-    }
-
+    @IBOutlet var stackView: UIStackView!
 
     @IBOutlet var newGameButton: UIButton!
-
     @IBOutlet var continueGameButton: UIButton!
 
 
-    var state: State = .initial {
-        didSet {
+    private lazy var menuButtons: [UIButton] = {
+        return self.stackView.subviews
+            .filter { $0 is UIButton }.map { $0 as! UIButton }
+    }()
 
-            switch state {
 
-            case .initial:
-                newGameButton.isHidden = false
-                continueGameButton.isHidden = true
+    private lazy var visibleMenuButtonsForState: [MenuViewController.State: [UIButton]] = [
 
-            case .gameInProgress:
-                newGameButton.isHidden = true
-                continueGameButton.isHidden = false
-            }
+        .initial:        [self.newGameButton],
+        .gameInProgress: [self.continueGameButton]
+    ]
+
+
+    func showMenuForState(state: MenuViewController.State) {
+
+        if let buttons = visibleMenuButtonsForState[state] {
+            showMenuWithButtons(visibleButtons: buttons)
+        }
+    }
+
+
+    private func showMenuWithButtons(visibleButtons: [UIButton]) {
+
+        func shouldShowButton(button: UIButton) -> Bool {
+            return visibleButtons.contains(button)
+        }
+
+        for button in menuButtons {
+            button.isHidden = !shouldShowButton(button: button)
         }
     }
     
+
+//    private lazy var statesVisible: [UIButton: [MenuViewController.State]] = [
+//
+//        self.newGameButton: [.initial],
+//        self.continueGameButton: [.gameInProgress]
+//    ]
+//
+//
+//    private func shouldHide(button: UIButton, forState state: MenuViewController.State) -> Bool {
+//
+//        guard let statesVisible = statesVisible[button] else {
+//            return false
+//        }
+//
+//        return !statesVisible.contains(state)
+//    }
+//
+//
+//    func showMenuForState(state: MenuViewController.State) {
+//
+//        for button in statesVisible.keys  {
+//            button.isHidden = shouldHide(button: button, forState: state)
+//        }
+//    }
+
 
     func makeRoundedCorners() {
 
