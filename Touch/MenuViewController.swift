@@ -30,18 +30,26 @@ class MenuViewController: UIViewController {
         super.viewWillAppear(animated)
 
         if game == nil || game!.isOver {
-            menuView.setPlayButtonTitle(title: "New Game")
+            menuView.state = .initial
         }
         else {
-            menuView.setPlayButtonTitle(title: "Continue Game")
+            menuView.state = .gameInProgress
         }
     }
 
 
-    @IBAction func showGame(_ sender: UIButton) {
+    @IBAction func newGame(_ sender: UIButton) {
+
+        game = Game()
+        showGame()
+    }
+
+
+    @IBAction func continueGame(_ sender: UIButton) {
 
         showGame()
     }
+
 }
 
 
@@ -58,14 +66,6 @@ extension MenuViewController {
         if segue.identifier == "showGameSegue" {
 
             if let gameVC = segue.destination as? GameViewController {
-
-                if game == nil {
-                    game = Game()
-                }
-
-                if game!.isOver {
-                    game!.reset()
-                }
 
                 game!.delegate = gameVC
                 game!.sendFullState()

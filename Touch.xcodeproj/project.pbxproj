@@ -121,7 +121,7 @@
 				14AD41661E4C602700E9D1A6 /* Config.swift */,
 				148D588E1E4DE9CA00ED25FC /* Scenes */,
 				14899BE81E4B4F270012F4D9 /* Models */,
-				1465C69A1E49F41A003EE7BC /* UI */,
+				1465C69A1E49F41A003EE7BC /* Storyboards */,
 				1465C6731E49EA2C003EE7BC /* Assets.xcassets */,
 				1465C6781E49EA2C003EE7BC /* Info.plist */,
 			);
@@ -146,13 +146,13 @@
 			path = TouchUITests;
 			sourceTree = "<group>";
 		};
-		1465C69A1E49F41A003EE7BC /* UI */ = {
+		1465C69A1E49F41A003EE7BC /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				1465C6751E49EA2C003EE7BC /* LaunchScreen.storyboard */,
 				1465C6701E49EA2C003EE7BC /* Main.storyboard */,
 			);
-			name = UI;
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 		14899BE81E4B4F270012F4D9 /* Models */ = {

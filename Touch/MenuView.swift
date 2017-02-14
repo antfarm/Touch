@@ -11,21 +11,38 @@ import UIKit
 
 class MenuView: UIView {
 
-    @IBOutlet var playButton: UIButton!
+    enum State {
 
-
-    func makeRoundedCorners() {
-
-        playButton.layer.cornerRadius = 8
+        case initial
+        case gameInProgress
     }
 
 
-    func setPlayButtonTitle(title: String) {
+    @IBOutlet var newGameButton: UIButton!
 
-        UIView.performWithoutAnimation {
-            playButton.setTitle(title, for: .normal)
-            playButton.layoutIfNeeded()
+    @IBOutlet var continueGameButton: UIButton!
+
+
+    var state: State = .initial {
+        didSet {
+
+            switch state {
+
+            case .initial:
+                newGameButton.isHidden = false
+                continueGameButton.isHidden = true
+
+            case .gameInProgress:
+                newGameButton.isHidden = true
+                continueGameButton.isHidden = false
+            }
         }
+    }
+    
 
+    func makeRoundedCorners() {
+
+        newGameButton.layer.cornerRadius = 8
+        continueGameButton.layer.cornerRadius = 8
     }
 }
