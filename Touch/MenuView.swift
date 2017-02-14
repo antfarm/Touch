@@ -14,7 +14,9 @@ class MenuView: UIView {
     @IBOutlet var stackView: UIStackView!
 
     @IBOutlet var newGameButton: UIButton!
+    @IBOutlet var newNetworkGameButton: UIButton!
     @IBOutlet var continueGameButton: UIButton!
+    @IBOutlet var resignGameButton: UIButton!
 
 
     private lazy var menuButtons: [UIButton] = {
@@ -25,8 +27,11 @@ class MenuView: UIView {
 
     private lazy var visibleMenuButtonsForState: [MenuViewController.State: [UIButton]] = [
 
-        .initial:        [self.newGameButton],
-        .gameInProgress: [self.continueGameButton]
+        .initial:        [self.newGameButton,
+                          self.newNetworkGameButton],
+
+        .gameInProgress: [self.continueGameButton,
+                          self.resignGameButton]
     ]
 
 
@@ -48,7 +53,7 @@ class MenuView: UIView {
             button.isHidden = !shouldShowButton(button: button)
         }
     }
-    
+
 
 //    private lazy var statesVisible: [UIButton: [MenuViewController.State]] = [
 //

@@ -65,6 +65,11 @@ class MenuViewController: UIViewController {
         showGame()
     }
 
+
+    @IBAction func resignGame(_ sender: UIButton) {
+
+        state = .initial
+    }
 }
 
 

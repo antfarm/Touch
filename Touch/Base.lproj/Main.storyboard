@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qo6-bJ-imY">
-                                <rect key="frame" x="87" y="293" width="240" height="150"/>
+                                <rect key="frame" x="87" y="213" width="240" height="310"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYw-pc-nlD" userLabel="New Game Button">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="70"/>
@@ -41,8 +41,23 @@
                                             <action selector="newGame:" destination="v30-dk-x0N" eventType="touchUpInside" id="FMD-aO-FtR"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSu-vM-RTW" userLabel="Continue Game Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGa-Ct-k8K" userLabel="New Network Game Button">
                                         <rect key="frame" x="0.0" y="80" width="240" height="70"/>
+                                        <color key="backgroundColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="750" constant="70" id="DKm-BY-11E"/>
+                                            <constraint firstAttribute="width" constant="240" id="i9q-qY-9QU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="New Network Game">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="newGame:" destination="v30-dk-x0N" eventType="touchUpInside" id="r6w-nt-z8U"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSu-vM-RTW" userLabel="Continue Game Button">
+                                        <rect key="frame" x="0.0" y="160" width="240" height="70"/>
                                         <color key="backgroundColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="750" constant="70" id="cg9-Zm-F3t"/>
@@ -56,6 +71,21 @@
                                             <action selector="continueGame:" destination="v30-dk-x0N" eventType="touchUpInside" id="liF-Zp-6rN"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9la-gP-tch" userLabel="Resign Game Button">
+                                        <rect key="frame" x="0.0" y="240" width="240" height="70"/>
+                                        <color key="backgroundColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="1vJ-Uf-SLw"/>
+                                            <constraint firstAttribute="height" priority="750" constant="70" id="Ptq-iB-xyr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="Resign Game">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="resignGame:" destination="v30-dk-x0N" eventType="touchUpInside" id="pCF-2e-1PC"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -67,6 +97,8 @@
                         <connections>
                             <outlet property="continueGameButton" destination="hSu-vM-RTW" id="F6u-xm-jO8"/>
                             <outlet property="newGameButton" destination="YYw-pc-nlD" id="ESm-9Z-JKH"/>
+                            <outlet property="newNetworkGameButton" destination="xGa-Ct-k8K" id="OEC-B7-7xX"/>
+                            <outlet property="resignGameButton" destination="9la-gP-tch" id="D9I-yI-S2j"/>
                             <outlet property="stackView" destination="qo6-bJ-imY" id="zIa-aB-MnA"/>
                         </connections>
                     </view>
