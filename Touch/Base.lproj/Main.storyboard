@@ -34,7 +34,7 @@
                                             <constraint firstAttribute="height" priority="750" constant="70" id="vfJ-fB-c3J"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="New Game">
+                                        <state key="normal" title="Start Local Game">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -49,11 +49,11 @@
                                             <constraint firstAttribute="width" constant="240" id="i9q-qY-9QU"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="New Network Game">
+                                        <state key="normal" title="Start Network Game">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="newGame:" destination="v30-dk-x0N" eventType="touchUpInside" id="r6w-nt-z8U"/>
+                                            <action selector="newNetworkGame:" destination="v30-dk-x0N" eventType="touchUpInside" id="pc5-7X-zQ2"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSu-vM-RTW" userLabel="Continue Game Button">

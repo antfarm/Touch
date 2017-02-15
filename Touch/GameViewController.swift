@@ -10,12 +10,19 @@ import UIKit
 
 class GameViewController: UIViewController {
 
-    var game: Game!
+    var game: Game! {
+        didSet {
+            game.delegate = self
+            game.sendFullState()
+        }
+    }
 
     var remotePlayer: Game.Player?
 
     var remoteGameSession: RemoteGameSession? {
-        didSet { remoteGameSession?.delegate = self }
+        didSet {
+            remoteGameSession?.delegate = self
+        }
     }
 
     var alertMessage: String?
@@ -39,7 +46,7 @@ class GameViewController: UIViewController {
     @IBAction func tileTouched(_ button: UIButton) {
 
         guard remotePlayer == nil || game.currentPlayer != remotePlayer else {
-            showModalAlert(message: "PLease wait for remote opponent's turn!")
+            showModalAlert(message: "Please wait for your opponent's turn!")
             return
         }
 

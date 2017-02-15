@@ -19,6 +19,7 @@ class MenuViewController: UIViewController {
 
 
     fileprivate var game: Game?
+    fileprivate var isNetworkGame = false
 
     private var menuView: MenuView { return view as! MenuView }
 
@@ -56,10 +57,21 @@ class MenuViewController: UIViewController {
     @IBAction func newGame(_ sender: UIButton) {
 
         game = Game()
+
+        isNetworkGame = false
         showGame()
     }
 
 
+    @IBAction func newNetworkGame(_ sender: UIButton) {
+
+        game = Game()
+
+        isNetworkGame = true
+        showGame()
+    }
+    
+    
     @IBAction func continueGame(_ sender: UIButton) {
 
         showGame()
@@ -67,6 +79,8 @@ class MenuViewController: UIViewController {
 
 
     @IBAction func resignGame(_ sender: UIButton) {
+
+        game = nil
 
         state = .initial
     }
@@ -87,10 +101,12 @@ extension MenuViewController {
 
             if let gameVC = segue.destination as? GameViewController {
 
-                game!.delegate = gameVC
-                game!.sendFullState()
-
                 gameVC.game = game
+
+                gameVC.remotePlayer =  isNetworkGame ? .playerB : nil
+
+                let remoteGameSession = RemoteGameSession()
+                gameVC.remoteGameSession = remoteGameSession
             }
         }
     }
