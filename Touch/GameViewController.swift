@@ -21,6 +21,7 @@ class GameViewController: UIViewController {
 
     var remoteGameSession: RemoteGameSession? {
         didSet {
+            remotePlayer = remoteGameSession != nil ? .playerB : nil
             remoteGameSession?.delegate = self
         }
     }
