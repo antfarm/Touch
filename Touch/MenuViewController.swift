@@ -67,7 +67,9 @@ class MenuViewController: UIViewController {
     @IBAction func newNetworkGame(_ sender: UIButton) {
 
         game = Game()
+
         remoteGameSession = RemoteGameSession()
+        remoteGameSession!.start()
 
         showGame()
     }
@@ -81,8 +83,10 @@ class MenuViewController: UIViewController {
 
     @IBAction func resignGame(_ sender: UIButton) {
 
+        remoteGameSession!.stop()
+        
         game = nil
-        // remoteGameSession = nil
+        remoteGameSession = nil
 
         state = .initial
     }

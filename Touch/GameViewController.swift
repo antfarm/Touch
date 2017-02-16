@@ -52,7 +52,10 @@ class GameViewController: UIViewController {
         }
 
         let (x, y) = coordinates(tag: button.tag)
+
         game.makeMove(x: x, y: y)
+
+        remoteGameSession?.sendMove(x: x, y: y)
     }
 
 
@@ -65,7 +68,7 @@ class GameViewController: UIViewController {
 
 extension GameViewController: RemoteGameSessionDelegate {
 
-    func receivedMove(x: Int, y: Int) {
+    func didReceiveMove(x: Int, y: Int) {
 
         guard game.currentPlayer == remotePlayer else {
             print("EROR: Not remote player's turn!")
@@ -73,6 +76,17 @@ extension GameViewController: RemoteGameSessionDelegate {
         }
 
         game.makeMove(x: x, y: y)
+    }
+
+
+    func didResignGame() {
+
+        game = nil
+        remoteGameSession = nil
+
+        // game.resign(player: remotePlayer)
+
+        print("Remote player resigned.")
     }
 }
 

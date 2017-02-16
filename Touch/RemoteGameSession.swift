@@ -8,34 +8,120 @@
 
 
 import Foundation
-import MultipeerConnectivity // remove dependency, make peer id a String
+import MultipeerConnectivity
 
 
 protocol RemoteGameSessionDelegate {
 
-    func receivedMove(x: Int, y: Int)
+    func didReceiveMove(x: Int, y: Int)
+
+    func didResignGame()
 }
 
 
 class RemoteGameSession {
 
-    var delegate: RemoteGameSessionDelegate?
-}
+    enum Message {
+
+        case move(x: Int, y: Int)
+
+        case resign
 
 
-extension RemoteGameSession: ConnectivityManagerDelegate {
+        static let commandMove = "MOVE"
+        static let commandResign = "QUIT"
 
-    func connectedDevicesChanged(manager: ConnectivityManager, connectedDevices: [String]) {
 
+        func serialize() -> String {
+
+            switch self {
+            case .move(let x, let y):
+                return "\(Message.commandMove) \(x) \(y)"
+
+            case .resign:
+                return "\(Message.commandResign)"
+            }
+        }
+
+
+        static func deserialize(string: String) -> Message? {
+
+            let components = string.components(separatedBy: " ")
+
+            switch components[0] {
+            case commandMove:
+                return .move(x: Int(components[1])!, y: Int(components[2])!)
+
+            case commandResign:
+                return .resign
+
+            default:
+                print("UNKNOWN MESSAGE: \(string)")
+                return nil
+            }
+        }
     }
 
 
-    func messageReceived(message: String, from: String) {
+    private lazy var service: MultipeerService = {
+        return MultipeerService(serviceName: Config.MultipeerService.serviceType)
+    }()
 
-        let move: (Int, Int)? = (3, 3)
 
-        if let (x, y) = move {
-            delegate?.receivedMove(x: x, y: y)
+    var delegate: RemoteGameSessionDelegate?
+
+
+    func start() {
+
+        service.startDiscovery()
+    }
+
+
+    func stop() {
+
+        service.stopDiscovery()
+    }
+
+
+    func sendMove(x: Int, y: Int) {
+
+        let message = Message.move(x: x, y: y).serialize()
+        service.sendMessage(message: message)
+    }
+
+
+    func sendResign() {
+
+        let message = Message.resign.serialize()
+        service.sendMessage(message: message)
+    }
+}
+
+
+extension RemoteGameSession: MultipeerServiceDelegate {
+
+    func connectedDevicesChanged(manager: MultipeerService, connectedDevices: [MCPeerID]) {
+
+        let displayNames = connectedDevices.map { $0.displayName }
+        print("CONNECTED: \(displayNames)")
+    }
+
+
+    func didReceiveMessage(message: String, from peerID: MCPeerID) {
+
+        let displayName = peerID.displayName
+        print("MESSAGE FROM \(displayName): \(message)")
+
+        guard let message = Message.deserialize(string: message) else {
+            return
+        }
+
+        switch message {
+        case .move(let x, let y):
+            delegate?.didReceiveMove(x: x, y: y)
+
+        case .resign:
+            delegate?.didResignGame()
         }
     }
     

@@ -9,6 +9,12 @@
 struct Config {
 
     struct UI {
+        
         static let roundedCorners = false
+    }
+
+    struct MultipeerService {
+
+        static let serviceType = "touch7-game"
     }
 }

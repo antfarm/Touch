@@ -17,7 +17,7 @@
 		1465C68D1E49EA2C003EE7BC /* TouchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465C68C1E49EA2C003EE7BC /* TouchUITests.swift */; };
 		14899BED1E4BA6390012F4D9 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14899BEC1E4BA6390012F4D9 /* AlertViewController.swift */; };
 		14899BEF1E4C4D090012F4D9 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14899BEE1E4C4D090012F4D9 /* AlertView.swift */; };
-		148D58901E4E1E6000ED25FC /* ConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D588F1E4E1E6000ED25FC /* ConnectivityManager.swift */; };
+		148D58901E4E1E6000ED25FC /* MultipeerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D588F1E4E1E6000ED25FC /* MultipeerService.swift */; };
 		14A2A6C51E4B2DEA00CB6891 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A2A6C41E4B2DEA00CB6891 /* TileView.swift */; };
 		14A2A6C91E4B3C3600CB6891 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A2A6C81E4B3C3600CB6891 /* GameView.swift */; };
 		14AD41671E4C602700E9D1A6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD41661E4C602700E9D1A6 /* Config.swift */; };
@@ -60,7 +60,7 @@
 		1465C68E1E49EA2C003EE7BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14899BEC1E4BA6390012F4D9 /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		14899BEE1E4C4D090012F4D9 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
-		148D588F1E4E1E6000ED25FC /* ConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivityManager.swift; sourceTree = "<group>"; };
+		148D588F1E4E1E6000ED25FC /* MultipeerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerService.swift; sourceTree = "<group>"; };
 		14A2A6C41E4B2DEA00CB6891 /* TileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		14A2A6C81E4B3C3600CB6891 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		14AD41661E4C602700E9D1A6 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 			children = (
 				14EFBFF51E4A15CD009F121F /* Game.swift */,
 				144A4EC81E534F91008AC573 /* RemoteGameSession.swift */,
-				148D588F1E4E1E6000ED25FC /* ConnectivityManager.swift */,
+				148D588F1E4E1E6000ED25FC /* MultipeerService.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -347,7 +347,7 @@
 				14EFBFF61E4A15CD009F121F /* Game.swift in Sources */,
 				14AD41691E4C7EA500E9D1A6 /* MenuViewController.swift in Sources */,
 				14AD416B1E4C903B00E9D1A6 /* MenuView.swift in Sources */,
-				148D58901E4E1E6000ED25FC /* ConnectivityManager.swift in Sources */,
+				148D58901E4E1E6000ED25FC /* MultipeerService.swift in Sources */,
 				14A2A6C51E4B2DEA00CB6891 /* TileView.swift in Sources */,
 				14AD41671E4C602700E9D1A6 /* Config.swift in Sources */,
 				1465C66D1E49EA2C003EE7BC /* AppDelegate.swift in Sources */,
