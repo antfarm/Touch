@@ -21,7 +21,7 @@ class GameViewController: UIViewController {
 
     var remoteGameSession: RemoteGameSession? {
         didSet {
-            remotePlayer = remoteGameSession != nil ? .playerB : nil
+            remotePlayer = remoteGameSession != nil ? (game.player == .playerA ? .playerB : .playerA) : nil
             remoteGameSession?.delegate = self
         }
     }
@@ -31,6 +31,7 @@ class GameViewController: UIViewController {
 
     var gameView: GameView { return view as! GameView }
 
+    var sendValidMove = false // TODO: find better way!!!
 
     override var prefersStatusBarHidden: Bool { return true }
 
@@ -53,6 +54,8 @@ class GameViewController: UIViewController {
 
         let (x, y) = coordinates(tag: button.tag)
 
+        sendValidMove = true
+
         game.makeMove(x: x, y: y)
 
         remoteGameSession?.sendMove(x: x, y: y)
@@ -71,9 +74,11 @@ extension GameViewController: RemoteGameSessionDelegate {
     func didReceiveMove(x: Int, y: Int) {
 
         guard game.currentPlayer == remotePlayer else {
-            print("EROR: Not remote player's turn!")
+            print("ERROR: Not remote player's turn!")
             return
         }
+
+        sendValidMove = false
 
         game.makeMove(x: x, y: y)
     }
@@ -146,6 +151,16 @@ extension GameViewController: GameDelegate {
             showModalAlert(message:
                 "You are not allowed to copy your opponent's previous move.")
         }
+    }
+
+
+    func validMove(x: Int, y: Int) {
+
+        guard sendValidMove else {
+            return
+        }
+
+        //remoteGameSession?.sendMove(x: x, y: y)
     }
 
 

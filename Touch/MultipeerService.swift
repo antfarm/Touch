@@ -14,7 +14,9 @@ import MultipeerConnectivity
 
 protocol MultipeerServiceDelegate {
 
-    func connectedDevicesChanged(manager: MultipeerService, connectedDevices: [MCPeerID])
+    func peerDidConnect(peer: MCPeerID)
+
+    func peerDidDisconnect(peer: MCPeerID)
 
     func didReceiveMessage(message: String, from: MCPeerID)
 }
@@ -41,7 +43,13 @@ class MultipeerService: NSObject {
     }()
 
 
-    fileprivate var timeStarted: TimeInterval!
+    fileprivate var timeStarted = Date().timeIntervalSince1970
+
+
+    var connectedPeers: [MCPeerID] {
+        return session.connectedPeers
+    }
+
 
     var delegate: MultipeerServiceDelegate?
 
@@ -51,37 +59,37 @@ class MultipeerService: NSObject {
         serviceType = serviceName
         peerID = MCPeerID(displayName: displayName)
 
+        timeStarted = Date().timeIntervalSince1970
+
         super.init()
     }
 
 
-    deinit {
+    func startAdvertising() {
 
-        stopDiscovery()
+        print("ADV START \(serviceType)")
+        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
+        serviceAdvertiser!.startAdvertisingPeer()
     }
 
 
-    func startDiscovery(discoveryInfo: [String: String]? = nil) {
+    func stopAdvertising() {
 
-        timeStarted = Date().timeIntervalSince1970
+        print("ADV STOP")
+        serviceAdvertiser?.stopAdvertisingPeer()
+        serviceAdvertiser = nil
+    }
 
-        print("ADV START")
-        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: discoveryInfo, serviceType: serviceType)
-        serviceAdvertiser!.startAdvertisingPeer()
 
-        print("BRWS START")
+    func startBrowsing() {
+
+        print("BRWS START \(serviceType)")
         serviceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         serviceBrowser!.startBrowsingForPeers()
     }
 
 
-    func stopDiscovery() {
-
-        timeStarted = nil
-
-        print("ADV STOP")
-        serviceAdvertiser?.stopAdvertisingPeer()
-        serviceAdvertiser = nil
+    func stopBrowsing() {
 
         print("BRWS STOP")
         serviceBrowser?.stopBrowsingForPeers()
@@ -115,19 +123,25 @@ extension MultipeerService: MCNearbyServiceAdvertiserDelegate {
 
         print("ADV didReceiveInvitationFromPeer peerID: \(peerID)")
 
-        let timeStartedPeer: TimeInterval? = context?.withUnsafeBytes { $0.pointee }
+//        let timeStartedPeer: TimeInterval? = context?.withUnsafeBytes { $0.pointee }
+//
+//        if let timeStartedPeer = timeStartedPeer {
+//
+//            print("TIME: \(timeStarted) < \(timeStartedPeer) ?")
+//
+//            let acceptInvitation = timeStarted < timeStartedPeer
+//
+//            invitationHandler(acceptInvitation, session)
+//
+//            if acceptInvitation {
+//                print("ADV ACCEPT INVITATION FROM \(peerID)")
+//                advertiser.stopAdvertisingPeer()
+//            }
+//        }
 
-        if let timeStartedPeer = timeStartedPeer {
+        let acceptInvitation = session.connectedPeers.count < 3
 
-            let acceptInvitation = timeStarted < timeStartedPeer
-
-            invitationHandler(acceptInvitation, session)
-
-            if acceptInvitation {
-                print("ADV ACCEPT INVITATION FROM \(peerID)")
-                advertiser.stopAdvertisingPeer()
-            }
-        }
+        invitationHandler(acceptInvitation, session)
     }
 }
 
@@ -145,9 +159,11 @@ extension MultipeerService: MCNearbyServiceBrowserDelegate {
 
         print("BRWS foundPeer peerID: \(peerID) withDiscoveryInfo info: \(info)")
 
-        let context = Data(bytes: &timeStarted, count: MemoryLayout<TimeInterval>.size)
+//        let context = Data(bytes: &timeStarted, count: MemoryLayout<TimeInterval>.size)
+//
+//        browser.invitePeer(peerID, to: session, withContext: context, timeout: 100)
 
-        browser.invitePeer(peerID, to: session, withContext: context, timeout: 100)
+        browser.invitePeer(peerID, to: session, withContext: nil, timeout: 100)
     }
 
 
@@ -164,8 +180,14 @@ extension MultipeerService: MCSessionDelegate {
 
         print("SESS peer peerId: \(peerID) didChange state: \(state)")
 
-        delegate?.connectedDevicesChanged(
-            manager: self, connectedDevices: session.connectedPeers)
+        switch state {
+            case .connecting:
+                break
+            case .connected:
+                delegate?.peerDidConnect(peer: peerID)
+            case .notConnected:
+                delegate?.peerDidDisconnect(peer: peerID)
+        }
     }
 
 
@@ -193,7 +215,6 @@ extension MultipeerService: MCSessionDelegate {
 
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String,
                  fromPeer peerID: MCPeerID) {
-
         // not used
     }
 }

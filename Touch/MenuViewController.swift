@@ -20,9 +20,16 @@ class MenuViewController: UIViewController {
 
     fileprivate var game: Game?
 
-    fileprivate var remoteGameSession: RemoteGameSession?
+
+    fileprivate var remoteGameSession: RemoteGameSession? {
+        didSet {
+            remoteGameSession?.connectionDelegate = self
+        }
+    }
+
 
     private var menuView: MenuView { return view as! MenuView }
+
 
     private var state: State = .initial {
         didSet {
@@ -30,6 +37,8 @@ class MenuViewController: UIViewController {
         }
     }
 
+
+    fileprivate var isInviter = false
 
     override var prefersStatusBarHidden: Bool { return true }
 
@@ -40,6 +49,10 @@ class MenuViewController: UIViewController {
         if Config.UI.roundedCorners {
             menuView.makeRoundedCorners()
         }
+
+        remoteGameSession = RemoteGameSession()
+
+        remoteGameSession?.startAdvertising()
     }
 
 
@@ -66,12 +79,16 @@ class MenuViewController: UIViewController {
 
     @IBAction func newNetworkGame(_ sender: UIButton) {
 
-        game = Game()
+        isInviter = true
 
-        remoteGameSession = RemoteGameSession()
-        remoteGameSession!.start()
+//        game = Game()
 
-        showGame()
+        //remoteGameSession?.stopAdvertising()
+        remoteGameSession?.startBrowsing()
+
+
+
+        //showGame()
     }
     
     
@@ -83,12 +100,28 @@ class MenuViewController: UIViewController {
 
     @IBAction func resignGame(_ sender: UIButton) {
 
-        remoteGameSession!.stop()
-        
         game = nil
-        remoteGameSession = nil
+        remoteGameSession = RemoteGameSession()
 
         state = .initial
+    }
+}
+
+
+extension MenuViewController: RemoteGameConnectionDelegate {
+
+    func didConnect() {
+
+        print("DID CONNECT: \(remoteGameSession?.connectedPeers)")
+
+        game = Game(player: isInviter ? .playerA : .playerB)
+
+        showGame()
+    }
+
+
+    func didDisconnect() {
+
     }
 }
 

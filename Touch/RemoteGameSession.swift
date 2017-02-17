@@ -19,9 +19,17 @@ protocol RemoteGameSessionDelegate {
 }
 
 
+protocol RemoteGameConnectionDelegate {
+
+    func didConnect()
+
+    func didDisconnect()
+}
+
+
 class RemoteGameSession {
 
-    enum Message {
+    fileprivate enum Message {
 
         case move(x: Int, y: Int)
 
@@ -64,25 +72,46 @@ class RemoteGameSession {
 
 
     private lazy var service: MultipeerService = {
-        return MultipeerService(serviceName: Config.MultipeerService.serviceType)
+        let service = MultipeerService(serviceName: Config.MultipeerService.serviceType)
+        service.delegate = self
+        return service
     }()
+
+
+    var connectedPeers: [String] {
+        return service.connectedPeers.map { $0.displayName }
+    }
 
 
     var delegate: RemoteGameSessionDelegate?
 
+    var connectionDelegate: RemoteGameConnectionDelegate?
 
-    func start() {
 
-        service.startDiscovery()
+    func startAdvertising() {
+
+        service.startAdvertising()
     }
 
 
-    func stop() {
+    func stopAdvertising() {
 
-        service.stopDiscovery()
+        service.stopAdvertising()
     }
 
 
+    func startBrowsing() {
+
+        service.startBrowsing()
+    }
+
+
+    func stopBrowsing() {
+
+        service.stopBrowsing()
+    }
+
+    
     func sendMove(x: Int, y: Int) {
 
         let message = Message.move(x: x, y: y).serialize()
@@ -100,10 +129,24 @@ class RemoteGameSession {
 
 extension RemoteGameSession: MultipeerServiceDelegate {
 
-    func connectedDevicesChanged(manager: MultipeerService, connectedDevices: [MCPeerID]) {
 
-        let displayNames = connectedDevices.map { $0.displayName }
-        print("CONNECTED: \(displayNames)")
+    func peerDidConnect(peer: MCPeerID) {
+
+        print("PLAYER \(peer.displayName) CONNECTED")
+
+        DispatchQueue.main.sync {
+            connectionDelegate?.didConnect()
+        }
+    }
+
+
+    func peerDidDisconnect(peer: MCPeerID) {
+
+        print("PLAYER \(peer.displayName) DISCONNECTED")
+
+        DispatchQueue.main.sync {
+            connectionDelegate?.didDisconnect()
+        }
     }
 
 
@@ -118,10 +161,14 @@ extension RemoteGameSession: MultipeerServiceDelegate {
 
         switch message {
         case .move(let x, let y):
-            delegate?.didReceiveMove(x: x, y: y)
+            DispatchQueue.main.sync {
+                delegate?.didReceiveMove(x: x, y: y)
+            }
 
         case .resign:
-            delegate?.didResignGame()
+            DispatchQueue.main.sync {
+                delegate?.didResignGame()
+            }
         }
     }
     

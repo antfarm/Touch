@@ -19,6 +19,8 @@ protocol GameDelegate {
 
     func invalidMove(x: Int, y: Int, reason: Game.InvalidMoveReason)
 
+    func validMove(x: Int, y: Int)
+
     func gameOver(winner: Game.Player?)
 }
 
@@ -53,12 +55,11 @@ class Game {
 
     var delegate: GameDelegate?
 
+
+    var player: Player!
+
     private(set) var currentPlayer: Player! {
         didSet { delegate?.currentPlayerChanged(player: currentPlayer) }
-    }
-
-    private var opponent: Player {
-        return currentPlayer == .playerA ? .playerB : .playerA
     }
 
     private(set) var isOver: Bool = false {
@@ -84,7 +85,9 @@ class Game {
     }()
 
 
-    init() {
+    init(player: Player = .playerA) {
+
+        self.player = player
         reset()
     }
 
@@ -114,6 +117,12 @@ class Game {
     }
 
 
+    func opponent(player: Player) -> Player {
+
+        return player == .playerA ? .playerB : .playerA
+    }
+    
+
     func makeMove(x: Int, y: Int) {
 
         guard !isOver else {
@@ -129,7 +138,7 @@ class Game {
             claimNeighborhoodForPlayer(x: x, y: y, player: currentPlayer)
             finishMove(x: x, y: y)
 
-        case .owned(let player) where player == opponent:
+        case .owned(let player) where player == opponent(player: currentPlayer):
 
             guard previousMove == nil || previousMove! != (x, y) else {
                 delegate?.invalidMove(x: x, y: y, reason: .copy)
@@ -158,6 +167,8 @@ class Game {
 
         delegate?.scoreChanged(score: score)
 
+        delegate?.validMove(x: x, y: y)
+
         if occupiedTiles.count == 49 {
             isOver = true
         }
@@ -182,10 +193,10 @@ class Game {
             setTileState(x: x, y: y, state: .owned(by: player))
             score[currentPlayer]! += 1
 
-        case .owned(let player) where player == opponent:
+        case .owned(let player) where player == opponent(player: currentPlayer):
 
             setTileState(x: x, y: y, state: .destroyed)
-            score[opponent]! -= 1
+            score[player]! -= 1
 
         case .owned:
 
