@@ -35,7 +35,20 @@ class AlertViewController: UIViewController {
 
     @IBAction func okButtonPressed(_ sender: UIButton) {
 
-        self.dismiss(animated: true) { self.completion?() }
+        self.dismiss(animated: false) { self.completion?() }
     }
 }
 
+
+extension UIViewController {
+
+    func showModalAlert(message: String, completion: (() -> ())? = nil) {
+
+        let alertViewController = storyboard?.instantiateViewController(withIdentifier: "AlertViewController") as! AlertViewController
+
+        alertViewController.message = message
+        alertViewController.completion = completion
+
+        present(alertViewController, animated: false, completion: nil)
+    }
+}

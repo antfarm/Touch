@@ -102,6 +102,7 @@
                             <outlet property="stackView" destination="qo6-bJ-imY" id="zIa-aB-MnA"/>
                         </connections>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="showGameSegue" animates="NO" id="Plp-vn-5Tn"/>
                     </connections>
@@ -123,20 +124,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQl-K3-BHs" userLabel="Score View">
-                                <rect key="frame" x="20" y="60" width="374" height="152"/>
+                                <rect key="frame" x="20" y="40" width="374" height="172"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jkA-k1-oT1">
-                                        <rect key="frame" x="5" y="5" width="364" height="142"/>
+                                        <rect key="frame" x="5" y="5" width="364" height="162"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32s-pU-LtS" userLabel="Label A">
-                                                <rect key="frame" x="0.0" y="0.0" width="179.66666666666666" height="142"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="179.66666666666666" height="162"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="80"/>
                                                 <color key="textColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3B-Ru-4wQ" userLabel="Label B">
-                                                <rect key="frame" x="184.66666666666663" y="0.0" width="179.33333333333337" height="142"/>
+                                                <rect key="frame" x="184.66666666666663" y="0.0" width="179.33333333333337" height="162"/>
                                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="80"/>
                                                 <color key="textColor" red="0.3532273769" green="0.18581508099999999" blue="0.37057596450000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1153,9 +1154,6 @@
                             <outlet property="scoreView" destination="kQl-K3-BHs" id="Cbp-bo-u5j"/>
                         </connections>
                     </view>
-                    <connections>
-                        <segue destination="7Js-eY-hFx" kind="presentation" identifier="modalAlertSegue" modalTransitionStyle="crossDissolve" id="dUg-WA-cXi"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -1164,7 +1162,7 @@
         <!--Alert View Controller-->
         <scene sceneID="Gid-ma-Wxr">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="7Js-eY-hFx" customClass="AlertViewController" customModule="Touch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AlertViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="7Js-eY-hFx" customClass="AlertViewController" customModule="Touch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="I5U-Pn-RqY"/>
                         <viewControllerLayoutGuide type="bottom" id="SXZ-rr-hwf"/>
@@ -1174,7 +1172,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bcg-AL-NHc" userLabel="Background View">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ka-VR-vN4" userLabel="Dialog View">
@@ -1222,10 +1220,11 @@
                             <outlet property="okButton" destination="ISp-FF-Bbs" id="gef-LG-spi"/>
                         </connections>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tkd-mk-lDi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1201.875" y="98.239436619718305"/>
+            <point key="canvasLocation" x="-425" y="808"/>
         </scene>
     </scenes>
 </document>

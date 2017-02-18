@@ -26,9 +26,6 @@ class GameViewController: UIViewController {
         }
     }
 
-    var alertMessage: String?
-    var alertCompletion: (() -> ())?
-
     var gameView: GameView { return view as! GameView }
 
     var sendValidMove = false // TODO: find better way!!!
@@ -171,31 +168,6 @@ extension GameViewController: GameDelegate {
         }
         else {
             showModalAlert(message: "Game over!\nIt's a draw!")
-        }
-    }
-}
-
-
-extension GameViewController {
-
-    func showModalAlert(message: String, completion: (() -> ())? = nil) {
-
-        alertMessage = message
-        alertCompletion = completion
-
-        performSegue(withIdentifier: "modalAlertSegue", sender: nil)
-    }
-
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if segue.identifier == "modalAlertSegue" {
-
-            if let alertVC = segue.destination as? AlertViewController {
-
-                alertVC.message = alertMessage!
-                alertVC.completion = alertCompletion
-            }
         }
     }
 }
