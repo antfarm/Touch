@@ -12,23 +12,45 @@ import UIKit
 class AlertView: UIView {
 
     @IBOutlet var dialogView: UIView!
-    @IBOutlet var labelMessage: UILabel!
+
+    @IBOutlet var messageLabel: UILabel!
+    
     @IBOutlet var okButton: UIButton!
+    @IBOutlet var cancelButton: UIButton!
 
 
     func makeRoundedCorners() {
 
         dialogView.layer.cornerRadius = 8
 
-        labelMessage.layer.masksToBounds = true
-        labelMessage.layer.cornerRadius = 8
+        messageLabel.layer.masksToBounds = true
+        messageLabel.layer.cornerRadius = 8
 
         okButton.layer.cornerRadius = 8
+        cancelButton.layer.cornerRadius = 8
     }
 
 
-    func setText(message: String) {
+    func setMessageText(message: String) {
         
-        labelMessage.text = message
+        messageLabel.text = message
+    }
+
+
+    func setOKButtonTitle(title: String) {
+
+        okButton.setTitle(title, for: .normal)
+    }
+
+
+    func setCancelButtonTitle(title: String) {
+
+        cancelButton.setTitle(title, for: .normal)
+    }
+
+
+    func hideCancelButton() {
+
+        cancelButton.isHidden = true
     }
 }

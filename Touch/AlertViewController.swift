@@ -14,7 +14,12 @@ import UIKit
 class AlertViewController: UIViewController {
 
     var message: String!
-    var completion: (() -> ())?
+
+    var okButtonTitle: String?
+    var okAction: (() -> ())?
+
+    var cancelButtonTitle: String?
+    var cancelAction: (() -> ())?
 
     var alertView: AlertView { return view as! AlertView }
 
@@ -25,30 +30,55 @@ class AlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        alertView.setMessageText(message: message)
+
+        if let okButtonTitle = okButtonTitle {
+            alertView.setOKButtonTitle(title: okButtonTitle)
+        }
+
+        if let cancelButtonTitle = cancelButtonTitle {
+            alertView.setCancelButtonTitle(title: cancelButtonTitle)
+        }
+
+        if okAction == nil && cancelAction == nil {
+            alertView.hideCancelButton()
+        }
+        
         if Config.UI.roundedCorners {
             alertView.makeRoundedCorners()
         }
-
-        alertView.setText(message: message)
     }
 
 
     @IBAction func okButtonPressed(_ sender: UIButton) {
 
-        self.dismiss(animated: false) { self.completion?() }
+        self.dismiss(animated: false) { self.okAction?() }
+    }
+
+
+    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+
+        self.dismiss(animated: false) { self.cancelAction?() }
     }
 }
 
 
 extension UIViewController {
 
-    func showModalAlert(message: String, completion: (() -> ())? = nil) {
+    func showModalAlert(message: String,
+                        okTitle: String? = nil, okAction: (() -> ())? = nil,
+                        cancelTitle: String? = nil, cancelAction: (() -> ())? = nil) {
 
-        let alertViewController = storyboard?.instantiateViewController(withIdentifier: "AlertViewController") as! AlertViewController
+        let alertVC = storyboard?.instantiateViewController(withIdentifier: "AlertViewController") as! AlertViewController
 
-        alertViewController.message = message
-        alertViewController.completion = completion
+        alertVC.message = message
 
-        present(alertViewController, animated: false, completion: nil)
+        alertVC.okButtonTitle = okTitle
+        alertVC.okAction = okAction
+
+        alertVC.cancelButtonTitle = cancelTitle
+        alertVC.cancelAction = cancelAction
+
+        present(alertVC, animated: false, completion: nil)
     }
 }
