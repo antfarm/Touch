@@ -85,7 +85,6 @@ class RemoteGameSession {
 
 extension RemoteGameSession: MultipeerServiceDelegate {
 
-
     func peerDidConnect(peer: MCPeerID) {
 
         print("PLAYER \(peer.displayName) CONNECTED")
@@ -108,14 +107,14 @@ extension RemoteGameSession: MultipeerServiceDelegate {
 
     func didReceiveInvitation(invitationHandler: @escaping (Bool) -> Void) {
 
+        print("PEERS: \(connectedPeers)")
+
         guard connectedPeers.count <= 2 else {
             print("Already connected to anpother peer")
             return
         }
 
-        DispatchQueue.main.sync {
-            connectionDelegate?.didReceiveInvitation(invitationHandler: invitationHandler)
-        }
+        connectionDelegate?.didReceiveInvitation(invitationHandler: invitationHandler)
     }
 
 
