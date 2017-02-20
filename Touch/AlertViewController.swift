@@ -79,6 +79,6 @@ extension UIViewController {
         alertVC.cancelButtonTitle = cancelTitle
         alertVC.cancelAction = cancelAction
 
-        present(alertVC, animated: false, completion: nil)
+        present(alertVC, animated: false)
     }
 }
