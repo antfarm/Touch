@@ -31,48 +31,6 @@ protocol RemoteGameConnectionDelegate {
 
 class RemoteGameSession {
 
-    fileprivate enum Message {
-
-        case move(x: Int, y: Int)
-
-        case resign
-
-
-        static let commandMove = "MOVE"
-        static let commandResign = "QUIT"
-
-
-        func serialize() -> String {
-
-            switch self {
-            case .move(let x, let y):
-                return "\(Message.commandMove) \(x) \(y)"
-
-            case .resign:
-                return "\(Message.commandResign)"
-            }
-        }
-
-
-        static func deserialize(string: String) -> Message? {
-
-            let components = string.components(separatedBy: " ")
-
-            switch components[0] {
-            case commandMove:
-                return .move(x: Int(components[1])!, y: Int(components[2])!)
-
-            case commandResign:
-                return .resign
-
-            default:
-                print("UNKNOWN MESSAGE: \(string)")
-                return nil
-            }
-        }
-    }
-
-
     private lazy var service: MultipeerService = {
         let service = MultipeerService(serviceName: Config.MultipeerService.serviceType)
         service.delegate = self
@@ -91,25 +49,21 @@ class RemoteGameSession {
 
 
     func startAdvertising() {
-
         service.startAdvertising()
     }
 
 
     func stopAdvertising() {
-
         service.stopAdvertising()
     }
 
 
     func startBrowsing() {
-
         service.startBrowsing()
     }
 
 
     func stopBrowsing() {
-
         service.stopBrowsing()
     }
 
@@ -154,7 +108,14 @@ extension RemoteGameSession: MultipeerServiceDelegate {
 
     func didReceiveInvitation(invitationHandler: @escaping (Bool) -> Void) {
 
-        connectionDelegate?.didReceiveInvitation(invitationHandler: invitationHandler)
+        guard connectedPeers.count <= 2 else {
+            print("Already connected to anpother peer")
+            return
+        }
+
+        DispatchQueue.main.sync {
+            connectionDelegate?.didReceiveInvitation(invitationHandler: invitationHandler)
+        }
     }
 
 
@@ -179,5 +140,48 @@ extension RemoteGameSession: MultipeerServiceDelegate {
             }
         }
     }
-    
+}
+
+
+extension RemoteGameSession {
+
+    fileprivate enum Message {
+
+        case move(x: Int, y: Int)
+        case resign
+
+
+        static let commandMove = "MOVE"
+        static let commandResign = "QUIT"
+
+
+        func serialize() -> String {
+
+            switch self {
+            case .move(let x, let y):
+                return "\(Message.commandMove) \(x) \(y)"
+
+            case .resign:
+                return "\(Message.commandResign)"
+            }
+        }
+
+
+        static func deserialize(string: String) -> Message? {
+
+            let components = string.components(separatedBy: " ")
+
+            switch components[0] {
+            case commandMove:
+                return .move(x: Int(components[1])!, y: Int(components[2])!)
+
+            case commandResign:
+                return .resign
+                
+            default:
+                print("UNKNOWN MESSAGE: \(string)")
+                return nil
+            }
+        }
+    }
 }

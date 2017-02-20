@@ -128,14 +128,18 @@ extension MenuViewController: RemoteGameConnectionDelegate {
 
         print("DID CONNECT: \(remoteGameSession?.connectedPeers)")
 
-        game = Game(player: isInviter ? .playerA : .playerB)
-
-        showGame()
+        showModalAlert(message: "Peer connected. \(remoteGameSession?.connectedPeers)",
+            okTitle: "OK",
+            okAction: {
+                self.game = Game(player: self.isInviter ? .playerA : .playerB)
+                self.showGame()
+            })
     }
 
 
     func didDisconnect() {
 
+        showModalAlert(message: "Peer disconnected. \(remoteGameSession?.connectedPeers)")
     }
 }
 

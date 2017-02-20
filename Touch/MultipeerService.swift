@@ -125,24 +125,13 @@ extension MultipeerService: MCNearbyServiceAdvertiserDelegate {
 
         print("ADV didReceiveInvitationFromPeer peerID: \(peerID)")
 
-//        let timeStartedPeer: TimeInterval? = context?.withUnsafeBytes { $0.pointee }
-//
-//        if let timeStartedPeer = timeStartedPeer {
-//
-//            print("TIME: \(timeStarted) < \(timeStartedPeer) ?")
-//
-//            let acceptInvitation = timeStarted < timeStartedPeer
-//
-//            invitationHandler(acceptInvitation, session)
-//
-//            if acceptInvitation {
-//                print("ADV ACCEPT INVITATION FROM \(peerID)")
-//                advertiser.stopAdvertisingPeer()
-//            }
-//        }
+        guard !session.connectedPeers.contains(peerID) else {
 
-//        let acceptInvitation = session.connectedPeers.count < 3
-//        invitationHandler(acceptInvitation, session)
+            print("\t Peer already connected.")
+
+            invitationHandler(false, self.session)
+            return
+        }
 
         let invitationHandlerWithSession: (Bool) -> Void = { accept in
             invitationHandler(accept, self.session)
@@ -165,10 +154,6 @@ extension MultipeerService: MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {
 
         print("BRWS foundPeer peerID: \(peerID) withDiscoveryInfo info: \(info)")
-
-//        let context = Data(bytes: &timeStarted, count: MemoryLayout<TimeInterval>.size)
-//
-//        browser.invitePeer(peerID, to: session, withContext: context, timeout: 100)
 
         browser.invitePeer(peerID, to: session, withContext: nil, timeout: 100)
     }
