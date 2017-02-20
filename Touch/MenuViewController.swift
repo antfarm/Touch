@@ -34,6 +34,13 @@ class MenuViewController: UIViewController {
     private var state: State = .initial {
         didSet {
             menuView.showMenuForState(state: state)
+
+//            switch state {
+//            case .initial:
+//                remoteGameSession?.startAdvertising()
+//            default:
+//                remoteGameSession?.stopAdvertising()
+//            }
         }
     }
 
@@ -83,10 +90,8 @@ class MenuViewController: UIViewController {
 
 //        game = Game()
 
-        //remoteGameSession?.stopAdvertising()
+        remoteGameSession?.stopAdvertising()
         remoteGameSession?.startBrowsing()
-
-
 
         //showGame()
     }
