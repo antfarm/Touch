@@ -18,6 +18,8 @@ protocol MultipeerServiceDelegate {
 
     func peerDidDisconnect(peer: MCPeerID)
 
+    func didReceiveInvitation(invitationHandler: @escaping (Bool) -> Void)
+
     func didReceiveMessage(message: String, from: MCPeerID)
 }
 
@@ -139,9 +141,14 @@ extension MultipeerService: MCNearbyServiceAdvertiserDelegate {
 //            }
 //        }
 
-        let acceptInvitation = session.connectedPeers.count < 3
+//        let acceptInvitation = session.connectedPeers.count < 3
+//        invitationHandler(acceptInvitation, session)
 
-        invitationHandler(acceptInvitation, session)
+        let invitationHandlerWithSession: (Bool) -> Void = { accept in
+            invitationHandler(accept, self.session)
+        }
+
+        delegate?.didReceiveInvitation(invitationHandler: invitationHandlerWithSession)
     }
 }
 

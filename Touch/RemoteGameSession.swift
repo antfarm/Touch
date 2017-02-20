@@ -24,6 +24,8 @@ protocol RemoteGameConnectionDelegate {
     func didConnect()
 
     func didDisconnect()
+
+    func didReceiveInvitation(invitationHandler: @escaping (Bool) -> Void)
 }
 
 
@@ -147,6 +149,12 @@ extension RemoteGameSession: MultipeerServiceDelegate {
         DispatchQueue.main.sync {
             connectionDelegate?.didDisconnect()
         }
+    }
+
+
+    func didReceiveInvitation(invitationHandler: @escaping (Bool) -> Void) {
+
+        connectionDelegate?.didReceiveInvitation(invitationHandler: invitationHandler)
     }
 
 

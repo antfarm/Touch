@@ -115,6 +115,15 @@ class MenuViewController: UIViewController {
 
 extension MenuViewController: RemoteGameConnectionDelegate {
 
+
+    func didReceiveInvitation(invitationHandler: @escaping (Bool) -> Void) {
+
+        showModalAlert(message: "Accept invitation?",
+                       okTitle: "Accept", okAction: { invitationHandler(true) },
+                       cancelTitle: "Reject", cancelAction: { invitationHandler(false) })
+    }
+
+
     func didConnect() {
 
         print("DID CONNECT: \(remoteGameSession?.connectedPeers)")
