@@ -17,24 +17,27 @@ class GameViewController: UIViewController {
         }
     }
 
-    var remotePlayer: Game.Player?
+    fileprivate var remotePlayer: Game.Player?
 
-    var remoteGameSession: RemoteGameSession? {
+    fileprivate var remoteGameSession: RemoteGameSession? {
         didSet {
-            remotePlayer = remoteGameSession != nil ? (game.player == .playerA ? .playerB : .playerA) : nil
+            remotePlayer = remoteGameSession != nil ? (game?.player == .playerA ? .playerB : .playerA) : nil
             remoteGameSession?.delegate = self
         }
     }
 
-    var gameView: GameView { return view as! GameView }
+    fileprivate var gameView: GameView { return view as! GameView }
 
-    var sendValidMove = false // TODO: find better way!!!
+    fileprivate var sendValidMove = false // TODO: find better way!!!
 
+    
     override var prefersStatusBarHidden: Bool { return true }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        remoteGameSession = RemoteGameSession()
 
         if Config.UI.roundedCorners {
             gameView.makeRoundedCorners()
@@ -59,9 +62,22 @@ class GameViewController: UIViewController {
     }
 
 
-    @IBAction func showMenu(_ sender: Any) {
+    func showMenu() {
 
-        dismiss(animated: false, completion: nil)
+        performSegue(withIdentifier: "showMenuSegue", sender: nil)
+    }
+    
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "showMenuSegue" {
+
+            if let menuVC = segue.destination as? MenuViewController {
+
+                menuVC.game = game
+                menuVC.remoteGameSession = remoteGameSession
+            }
+        }
     }
 }
 

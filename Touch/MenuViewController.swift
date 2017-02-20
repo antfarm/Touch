@@ -18,10 +18,10 @@ class MenuViewController: UIViewController {
     }
 
 
-    fileprivate var game: Game?
+    var game: Game?
 
 
-    fileprivate var remoteGameSession: RemoteGameSession? {
+    var remoteGameSession: RemoteGameSession? {
         didSet {
             remoteGameSession?.connectionDelegate = self
         }
@@ -56,8 +56,6 @@ class MenuViewController: UIViewController {
         if Config.UI.roundedCorners {
             menuView.makeRoundedCorners()
         }
-
-        remoteGameSession = RemoteGameSession()
 
         remoteGameSession?.startAdvertising()
     }
@@ -110,6 +108,12 @@ class MenuViewController: UIViewController {
 
         state = .initial
     }
+
+
+    func showGame() {
+
+        dismiss(animated: false, completion: nil)
+    }
 }
 
 
@@ -140,27 +144,5 @@ extension MenuViewController: RemoteGameConnectionDelegate {
     func didDisconnect() {
 
         showModalAlert(message: "Peer disconnected. \(remoteGameSession?.connectedPeers)")
-    }
-}
-
-
-extension MenuViewController {
-
-    func showGame() {
-
-        performSegue(withIdentifier: "showGameSegue", sender: nil)
-    }
-
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if segue.identifier == "showGameSegue" {
-
-            if let gameVC = segue.destination as? GameViewController {
-
-                gameVC.game = game
-                gameVC.remoteGameSession = remoteGameSession
-            }
-        }
     }
 }

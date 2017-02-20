@@ -199,8 +199,8 @@
 		148D588E1E4DE9CA00ED25FC /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				148D588B1E4DE96800ED25FC /* Menu */,
 				148D588C1E4DE96F00ED25FC /* Game */,
+				148D588B1E4DE96800ED25FC /* Menu */,
 				148D588D1E4DE97600ED25FC /* Alert */,
 			);
 			name = Scenes;
