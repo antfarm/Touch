@@ -109,8 +109,8 @@ extension RemoteGameSession: MultipeerServiceDelegate {
 
         print("PEERS: \(connectedPeers)")
 
-        guard connectedPeers.count <= 2 else {
-            print("Already connected to anpother peer")
+        guard connectedPeers.count <= 1 else {
+            print("Already connected to another peer")
             return
         }
 
