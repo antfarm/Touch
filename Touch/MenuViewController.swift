@@ -150,25 +150,3 @@ extension MenuViewController: RemoteGameConnectionDelegate {
         showModalAlert(message: "Peer disconnected. \(remoteGameSession?.connectedPeers)")
     }
 }
-
-
-//extension MenuViewController {
-//
-//    func showGame() {
-//
-//        performSegue(withIdentifier: "showGameSegue", sender: nil)
-//    }
-//
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//        if segue.identifier == "showGameSegue" {
-//
-//            if let gameVC = segue.destination as? GameViewController {
-//
-//                gameVC.game = game
-//                gameVC.remoteGameSession = remoteGameSession
-//            }
-//        }
-//    }
-//}
