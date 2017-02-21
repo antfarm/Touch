@@ -94,8 +94,13 @@ class Game {
     
     func reset() {
 
+        // player = ?
+
         isOver = false
         currentPlayer = .playerA
+
+        previousMove = nil
+        occupiedTiles = []
 
         score = [.playerA: 0, .playerB: 0]
         delegate?.scoreChanged(score: score)
