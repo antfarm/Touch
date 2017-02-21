@@ -20,6 +20,8 @@ class MenuViewController: UIViewController {
 
     fileprivate var game: Game?
 
+    fileprivate var gameViewController: GameViewController!
+
 
     fileprivate var remoteGameSession: RemoteGameSession? {
         didSet {
@@ -60,6 +62,8 @@ class MenuViewController: UIViewController {
         remoteGameSession = RemoteGameSession()
 
         remoteGameSession?.startAdvertising()
+
+        gameViewController = (storyboard?.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController)
     }
 
 
@@ -88,12 +92,8 @@ class MenuViewController: UIViewController {
 
         isInviter = true
 
-//        game = Game()
-
         remoteGameSession?.stopAdvertising()
         remoteGameSession?.startBrowsing()
-
-        //showGame()
     }
     
     
@@ -110,11 +110,19 @@ class MenuViewController: UIViewController {
 
         state = .initial
     }
+
+
+    func showGame() {
+
+        gameViewController.game = game
+        gameViewController.remoteGameSession = remoteGameSession
+
+        present(gameViewController, animated:false)
+    }
 }
 
 
 extension MenuViewController: RemoteGameConnectionDelegate {
-
 
     func didReceiveInvitation(invitationHandler: @escaping (Bool) -> Void) {
 
@@ -144,23 +152,23 @@ extension MenuViewController: RemoteGameConnectionDelegate {
 }
 
 
-extension MenuViewController {
-
-    func showGame() {
-
-        performSegue(withIdentifier: "showGameSegue", sender: nil)
-    }
-
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if segue.identifier == "showGameSegue" {
-
-            if let gameVC = segue.destination as? GameViewController {
-
-                gameVC.game = game
-                gameVC.remoteGameSession = remoteGameSession
-            }
-        }
-    }
-}
+//extension MenuViewController {
+//
+//    func showGame() {
+//
+//        performSegue(withIdentifier: "showGameSegue", sender: nil)
+//    }
+//
+//
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//        if segue.identifier == "showGameSegue" {
+//
+//            if let gameVC = segue.destination as? GameViewController {
+//
+//                gameVC.game = game
+//                gameVC.remoteGameSession = remoteGameSession
+//            }
+//        }
+//    }
+//}
