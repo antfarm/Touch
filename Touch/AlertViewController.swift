@@ -69,16 +69,17 @@ extension UIViewController {
                         okTitle: String? = nil, okAction: (() -> ())? = nil,
                         cancelTitle: String? = nil, cancelAction: (() -> ())? = nil) {
 
-        let alertVC = storyboard?.instantiateViewController(withIdentifier: "AlertViewController") as! AlertViewController
+        let alertViewController =
+            storyboard?.instantiateViewController(withIdentifier: "AlertViewController") as! AlertViewController
 
-        alertVC.message = message
+        alertViewController.message = message
 
-        alertVC.okButtonTitle = okTitle
-        alertVC.okAction = okAction
+        alertViewController.okButtonTitle = okTitle
+        alertViewController.okAction = okAction
 
-        alertVC.cancelButtonTitle = cancelTitle
-        alertVC.cancelAction = cancelAction
+        alertViewController.cancelButtonTitle = cancelTitle
+        alertViewController.cancelAction = cancelAction
 
-        present(alertVC, animated: false)
+        present(alertViewController, animated: false)
     }
 }
