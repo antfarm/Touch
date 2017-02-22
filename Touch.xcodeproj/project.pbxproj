@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		144A4EC91E534F91008AC573 /* RemoteGameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A4EC81E534F91008AC573 /* RemoteGameSession.swift */; };
+		144A4EC91E534F91008AC573 /* RemoteGameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A4EC81E534F91008AC573 /* RemoteGameService.swift */; };
 		1465C66D1E49EA2C003EE7BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465C66C1E49EA2C003EE7BC /* AppDelegate.swift */; };
 		1465C66F1E49EA2C003EE7BC /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465C66E1E49EA2C003EE7BC /* GameViewController.swift */; };
 		1465C6721E49EA2C003EE7BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1465C6701E49EA2C003EE7BC /* Main.storyboard */; };
@@ -44,7 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		144A4EC81E534F91008AC573 /* RemoteGameSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteGameSession.swift; sourceTree = "<group>"; };
+		144A4EC81E534F91008AC573 /* RemoteGameService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteGameService.swift; sourceTree = "<group>"; };
 		1465C6691E49EA2C003EE7BC /* Touch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Touch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1465C66C1E49EA2C003EE7BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1465C66E1E49EA2C003EE7BC /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 		1480AEDE1E5DA01D00284950 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				144A4EC81E534F91008AC573 /* RemoteGameSession.swift */,
+				144A4EC81E534F91008AC573 /* RemoteGameService.swift */,
 				148D588F1E4E1E6000ED25FC /* MultipeerService.swift */,
 			);
 			name = Services;
@@ -350,7 +350,7 @@
 			files = (
 				1465C66F1E49EA2C003EE7BC /* GameViewController.swift in Sources */,
 				14899BED1E4BA6390012F4D9 /* AlertViewController.swift in Sources */,
-				144A4EC91E534F91008AC573 /* RemoteGameSession.swift in Sources */,
+				144A4EC91E534F91008AC573 /* RemoteGameService.swift in Sources */,
 				14899BEF1E4C4D090012F4D9 /* AlertView.swift in Sources */,
 				14EFBFF61E4A15CD009F121F /* Game.swift in Sources */,
 				14AD41691E4C7EA500E9D1A6 /* MenuViewController.swift in Sources */,
