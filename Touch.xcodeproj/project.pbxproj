@@ -15,7 +15,6 @@
 		1465C6771E49EA2C003EE7BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1465C6751E49EA2C003EE7BC /* LaunchScreen.storyboard */; };
 		1465C6821E49EA2C003EE7BC /* TouchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465C6811E49EA2C003EE7BC /* TouchTests.swift */; };
 		1465C68D1E49EA2C003EE7BC /* TouchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465C68C1E49EA2C003EE7BC /* TouchUITests.swift */; };
-		148658E41E55EF5F007F9279 /* MultipeerUIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148658E31E55EF5E007F9279 /* MultipeerUIService.swift */; };
 		14899BED1E4BA6390012F4D9 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14899BEC1E4BA6390012F4D9 /* AlertViewController.swift */; };
 		14899BEF1E4C4D090012F4D9 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14899BEE1E4C4D090012F4D9 /* AlertView.swift */; };
 		148D58901E4E1E6000ED25FC /* MultipeerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D588F1E4E1E6000ED25FC /* MultipeerService.swift */; };
@@ -59,7 +58,6 @@
 		1465C6881E49EA2C003EE7BC /* TouchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TouchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1465C68C1E49EA2C003EE7BC /* TouchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchUITests.swift; sourceTree = "<group>"; };
 		1465C68E1E49EA2C003EE7BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		148658E31E55EF5E007F9279 /* MultipeerUIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerUIService.swift; sourceTree = "<group>"; };
 		14899BEC1E4BA6390012F4D9 /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		14899BEE1E4C4D090012F4D9 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		148D588F1E4E1E6000ED25FC /* MultipeerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerService.swift; sourceTree = "<group>"; };
@@ -123,6 +121,7 @@
 				14AD41661E4C602700E9D1A6 /* Config.swift */,
 				148D588E1E4DE9CA00ED25FC /* Scenes */,
 				14899BE81E4B4F270012F4D9 /* Models */,
+				1480AEDE1E5DA01D00284950 /* Services */,
 				1465C69A1E49F41A003EE7BC /* Storyboards */,
 				1465C6731E49EA2C003EE7BC /* Assets.xcassets */,
 				1465C6781E49EA2C003EE7BC /* Info.plist */,
@@ -157,13 +156,19 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
+		1480AEDE1E5DA01D00284950 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				144A4EC81E534F91008AC573 /* RemoteGameSession.swift */,
+				148D588F1E4E1E6000ED25FC /* MultipeerService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		14899BE81E4B4F270012F4D9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				14EFBFF51E4A15CD009F121F /* Game.swift */,
-				144A4EC81E534F91008AC573 /* RemoteGameSession.swift */,
-				148D588F1E4E1E6000ED25FC /* MultipeerService.swift */,
-				148658E31E55EF5E007F9279 /* MultipeerUIService.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -346,7 +351,6 @@
 				1465C66F1E49EA2C003EE7BC /* GameViewController.swift in Sources */,
 				14899BED1E4BA6390012F4D9 /* AlertViewController.swift in Sources */,
 				144A4EC91E534F91008AC573 /* RemoteGameSession.swift in Sources */,
-				148658E41E55EF5F007F9279 /* MultipeerUIService.swift in Sources */,
 				14899BEF1E4C4D090012F4D9 /* AlertView.swift in Sources */,
 				14EFBFF61E4A15CD009F121F /* Game.swift in Sources */,
 				14AD41691E4C7EA500E9D1A6 /* MenuViewController.swift in Sources */,
