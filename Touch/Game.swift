@@ -56,14 +56,12 @@ class Game {
     var delegate: GameDelegate?
 
 
-    var player: Player!
-
     private(set) var currentPlayer: Player! {
         didSet { delegate?.currentPlayerChanged(player: currentPlayer) }
     }
 
-    private(set) var isOver: Bool = false {
-        didSet { if isOver { delegate?.gameOver(winner: leadingPlayer) } }
+    var currentOpponent: Player {
+        return currentPlayer == .playerA ? .playerB : .playerA
     }
 
     private var leadingPlayer: Game.Player? {
@@ -71,10 +69,15 @@ class Game {
             score[.playerA]! > score[.playerB]! ? .playerA : .playerB
     }
 
+    private(set) var isOver: Bool = false {
+        didSet { if isOver { delegate?.gameOver(winner: leadingPlayer) } }
+    }
+
     private var score: [Player: Int]!
 
     private var tiles: [[TileState]] =
         Array(repeating: Array(repeating: .empty, count: 7), count: 7)
+
 
     private var previousMove: (x: Int, y: Int)?
 
@@ -85,22 +88,16 @@ class Game {
     }()
 
 
-    init(player: Player = .playerA) {
+    init() {
 
-        self.player = player
         reset()
     }
 
     
     func reset() {
 
-        // player = ?
-
         isOver = false
         currentPlayer = .playerA
-
-        previousMove = nil
-        occupiedTiles = []
 
         score = [.playerA: 0, .playerB: 0]
         delegate?.scoreChanged(score: score)
@@ -108,6 +105,9 @@ class Game {
         for (x, y) in coordinates {
             setTileState(x: x, y: y, state: .empty)
         }
+
+        previousMove = nil
+        occupiedTiles = []
     }
 
 
@@ -121,12 +121,6 @@ class Game {
         delegate?.scoreChanged(score: score)
     }
 
-
-    func opponent(player: Player) -> Player {
-
-        return player == .playerA ? .playerB : .playerA
-    }
-    
 
     func makeMove(x: Int, y: Int) {
 
@@ -143,7 +137,7 @@ class Game {
             claimNeighborhoodForPlayer(x: x, y: y, player: currentPlayer)
             finishMove(x: x, y: y)
 
-        case .owned(let player) where player == opponent(player: currentPlayer):
+        case .owned(let player) where player == currentOpponent:
 
             guard previousMove == nil || previousMove! != (x, y) else {
                 delegate?.invalidMove(x: x, y: y, reason: .copy)
@@ -168,11 +162,11 @@ class Game {
 
         previousMove = (x: x, y: y)
 
-        currentPlayer = currentPlayer == .playerA ? .playerB : .playerA
+        delegate?.validMove(x: x, y: y)
+
+        currentPlayer = currentOpponent
 
         delegate?.scoreChanged(score: score)
-
-        delegate?.validMove(x: x, y: y)
 
         if occupiedTiles.count == 49 {
             isOver = true
@@ -198,7 +192,7 @@ class Game {
             setTileState(x: x, y: y, state: .owned(by: player))
             score[currentPlayer]! += 1
 
-        case .owned(let player) where player == opponent(player: currentPlayer):
+        case .owned(let player) where player == currentOpponent:
 
             setTileState(x: x, y: y, state: .destroyed)
             score[player]! -= 1

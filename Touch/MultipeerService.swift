@@ -14,13 +14,15 @@ import MultipeerConnectivity
 
 protocol MultipeerServiceDelegate {
 
+    func didFindPeer(peer: MCPeerID, inviteHandler: @escaping (Bool) -> Void)
+
+    func didReceiveInvitation(peer: MCPeerID, invitationHandler: @escaping (Bool) -> Void)
+
     func peerDidConnect(peer: MCPeerID)
 
     func peerDidDisconnect(peer: MCPeerID)
 
-    func didReceiveInvitation(invitationHandler: @escaping (Bool) -> Void)
-
-    func didReceiveMessage(message: String, from: MCPeerID)
+    func didReceiveMessage(peer: MCPeerID, message: String)
 }
 
 
@@ -44,9 +46,7 @@ class MultipeerService: NSObject {
         return session
     }()
 
-
-    fileprivate var timeStarted = Date().timeIntervalSince1970
-
+    var maxNumberOfPeers = 1
 
     var connectedPeers: [MCPeerID] {
         return session.connectedPeers
@@ -60,8 +60,6 @@ class MultipeerService: NSObject {
 
         serviceType = serviceName
         peerID = MCPeerID(displayName: displayName)
-
-        timeStarted = Date().timeIntervalSince1970
 
         super.init()
     }
@@ -103,10 +101,12 @@ class MultipeerService: NSObject {
 
         print("SESS SEND \(message) TO \(session.connectedPeers.count) PEERS")
 
-        if session.connectedPeers.count > 0 {
-            if let data = message.data(using: .utf8) {
-                try! session.send(data, toPeers: session.connectedPeers, with: .reliable)
-            }
+        guard session.connectedPeers.count > 0 else {
+            return
+        }
+
+        if let data = message.data(using: .utf8) {
+            try! session.send(data, toPeers: session.connectedPeers, with: .reliable)
         }
     }
 }
@@ -125,10 +125,13 @@ extension MultipeerService: MCNearbyServiceAdvertiserDelegate {
 
         print("ADV didReceiveInvitationFromPeer peerID: \(peerID)")
 
+        guard session.connectedPeers.count <= maxNumberOfPeers else {
+            print("Already connected to max. number of peers.")
+            return
+        }
+
         guard !session.connectedPeers.contains(peerID) else {
-
             print("\t Peer already connected.")
-
             invitationHandler(false, self.session)
             return
         }
@@ -137,7 +140,7 @@ extension MultipeerService: MCNearbyServiceAdvertiserDelegate {
             invitationHandler(accept, self.session)
         }
 
-        delegate?.didReceiveInvitation(invitationHandler: invitationHandlerWithSession)
+        delegate?.didReceiveInvitation(peer: peerID, invitationHandler: invitationHandlerWithSession)
     }
 }
 
@@ -147,7 +150,6 @@ extension MultipeerService: MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
 
         print("BRWS didNotStartBrowsingForPeers error: \(error)")
-
     }
 
 
@@ -155,7 +157,18 @@ extension MultipeerService: MCNearbyServiceBrowserDelegate {
 
         print("BRWS foundPeer peerID: \(peerID) withDiscoveryInfo info: \(info)")
 
-        browser.invitePeer(peerID, to: session, withContext: nil, timeout: 100)
+        guard session.connectedPeers.count <= maxNumberOfPeers else {
+            print("Already connected to max. number of peers.")
+            return
+        }
+
+        let handler: (Bool) -> Void = { invite in
+            if invite {
+                browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 100)
+            }
+        }
+
+        delegate?.didFindPeer(peer: peerID, inviteHandler: handler)
     }
 
 
@@ -188,7 +201,7 @@ extension MultipeerService: MCSessionDelegate {
         print("SESS didReceive data: \(data.count) bytes fromPeer peerID: \(peerID)")
 
         if let message = String(data: data, encoding: .utf8) {
-            self.delegate?.didReceiveMessage(message: message, from: peerID)
+            self.delegate?.didReceiveMessage(peer: peerID, message: message)
         }
     }
 

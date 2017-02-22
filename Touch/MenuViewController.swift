@@ -13,41 +13,38 @@ class MenuViewController: UIViewController {
 
     enum State {
 
+        case empty
         case initial
         case gameInProgress
     }
 
 
-    fileprivate var game: Game?
+    var game: Game!
 
-    fileprivate var gameViewController: GameViewController!
-
-
-    fileprivate var remoteGameSession: RemoteGameSession? {
+    var remoteGameService: RemoteGameService! {
         didSet {
-            remoteGameSession?.connectionDelegate = self
+            remoteGameService.advertiserDelegate = self
         }
     }
+    
 
-
-    private var menuView: MenuView { return view as! MenuView }
-
-
-    private var state: State = .initial {
+    fileprivate var state: State = .initial {
         didSet {
-            menuView.showMenuForState(state: state)
-
-//            switch state {
-//            case .initial:
-//                remoteGameSession?.startAdvertising()
-//            default:
-//                remoteGameSession?.stopAdvertising()
-//            }
+            guard state != oldValue else { return }
+            
+            switch state {
+            case .initial:
+                remoteGameService.startAdvertising()
+            default:
+                remoteGameService.stopAdvertising()            }
         }
     }
+    
+    
+    var gameViewController: GameViewController!
 
+    fileprivate var menuView: MenuView { return view as! MenuView }
 
-    fileprivate var isInviter = false
 
     override var prefersStatusBarHidden: Bool { return true }
 
@@ -59,44 +56,40 @@ class MenuViewController: UIViewController {
             menuView.makeRoundedCorners()
         }
 
-        remoteGameSession = RemoteGameSession()
+        remoteGameService.startAdvertising()
 
-        remoteGameSession?.startAdvertising()
+        gameViewController = storyboard?.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
 
-        gameViewController = (storyboard?.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController)
+        gameViewController.game = game
+        gameViewController.remoteGameService = remoteGameService
     }
 
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if game == nil || game!.isOver {
+        if game.isOver {
             state = .initial
+            game.reset()
         }
-        else {
-            state = .gameInProgress
-        }
+
+        menuView.showMenuForState(state: state)
     }
 
 
     @IBAction func newGame(_ sender: UIButton) {
 
-        game = Game()
-        remoteGameSession = nil
+        menuView.showMenuForState(state: .empty)
+
+        state = .gameInProgress
+
+        game.reset()
+        gameViewController.remotePlayer = nil
 
         showGame()
     }
 
 
-    @IBAction func newNetworkGame(_ sender: UIButton) {
-
-        isInviter = true
-
-        remoteGameSession?.stopAdvertising()
-        remoteGameSession?.startBrowsing()
-    }
-    
-    
     @IBAction func continueGame(_ sender: UIButton) {
 
         showGame()
@@ -105,48 +98,37 @@ class MenuViewController: UIViewController {
 
     @IBAction func resignGame(_ sender: UIButton) {
 
-        game = nil
-        remoteGameSession = RemoteGameSession()
+        menuView.showMenuForState(state: .initial)
 
         state = .initial
+        game.reset()
     }
 
 
     func showGame() {
-
-        gameViewController.game = game
-        gameViewController.remoteGameSession = remoteGameSession
 
         present(gameViewController, animated:false)
     }
 }
 
 
-extension MenuViewController: RemoteGameConnectionDelegate {
+extension MenuViewController: RemoteGameAdvertiserDelegate {
 
-    func didReceiveInvitation(invitationHandler: @escaping (Bool) -> Void) {
+    func didReceiveInvitation(peer: String, invitationHandler: @escaping (Bool) -> Void) {
 
-        showModalAlert(message: "Accept invitation?",
-                       okTitle: "Accept", okAction: { invitationHandler(true) },
+        showModalAlert(message: "Accept invitation from \(peer)?",
+                       okTitle: "Accept",
+                       okAction: {
+                            invitationHandler(true)
+
+                            self.menuView.showMenuForState(state: .empty)
+                            self.state = .gameInProgress
+
+                            self.game.reset()
+
+                            self.gameViewController.remotePlayer = .playerA
+                            self.showGame()
+                        },
                        cancelTitle: "Reject", cancelAction: { invitationHandler(false) })
-    }
-
-
-    func didConnect() {
-
-        print("DID CONNECT: \(remoteGameSession?.connectedPeers)")
-
-        showModalAlert(message: "Peer connected. \(remoteGameSession?.connectedPeers)",
-            okTitle: "OK",
-            okAction: {
-                self.game = Game(player: self.isInviter ? .playerA : .playerB)
-                self.showGame()
-            })
-    }
-
-
-    func didDisconnect() {
-
-        showModalAlert(message: "Peer disconnected. \(remoteGameSession?.connectedPeers)")
     }
 }

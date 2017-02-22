@@ -13,22 +13,20 @@ class GameViewController: UIViewController {
     var game: Game! {
         didSet {
             game.delegate = self
-            game.sendFullState()
         }
     }
 
-    var remotePlayer: Game.Player?
-
-    var remoteGameSession: RemoteGameSession? {
+    var remoteGameService: RemoteGameService! {
         didSet {
-            remotePlayer = remoteGameSession != nil ? (game.player == .playerA ? .playerB : .playerA) : nil
-            remoteGameSession?.delegate = self
+            remoteGameService.sessionDelegate = self
+            remoteGameService.browserDelegate = self
         }
     }
 
     var gameView: GameView { return view as! GameView }
 
-    var sendValidMove = false // TODO: find better way!!!
+    var remotePlayer: Game.Player?
+    
 
     override var prefersStatusBarHidden: Bool { return true }
 
@@ -42,7 +40,18 @@ class GameViewController: UIViewController {
     }
 
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if !remoteGameService.isConnected {
+            remoteGameService.startBrowsing()
+        }
+    }
+
+    
     @IBAction func tileTouched(_ button: UIButton) {
+
+        remoteGameService.stopBrowsing()
 
         guard remotePlayer == nil || game.currentPlayer != remotePlayer else {
             showModalAlert(message: "Please wait for your opponent's turn!")
@@ -51,22 +60,55 @@ class GameViewController: UIViewController {
 
         let (x, y) = coordinates(tag: button.tag)
 
-        sendValidMove = true
-
         game.makeMove(x: x, y: y)
-
-        remoteGameSession?.sendMove(x: x, y: y)
     }
 
 
     @IBAction func showMenu(_ sender: Any) {
 
+        remoteGameService.stopBrowsing()
+        
         dismiss(animated: false, completion: nil)
     }
 }
 
 
+extension GameViewController: RemoteGameBrowserDelegate {
+
+    func didFindPeer(peer: String, inviteHandler: @escaping (Bool) -> Void) {
+
+        showModalAlert(message: "Found peer \(peer). Invite?",
+            okTitle: "Invite",
+            okAction: {
+                inviteHandler(true)
+            },
+            cancelTitle: "Ignore", cancelAction: {
+                inviteHandler(false)
+            })
+    }
+}
+
+
 extension GameViewController: RemoteGameSessionDelegate {
+
+    func didConnect() {
+
+        print("DID CONNECT: \(remoteGameService.connectedPeers)")
+
+        if remotePlayer == nil {
+            remotePlayer = .playerB
+        }
+
+        remoteGameService.stopBrowsing()
+        showModalAlert(message: "Peer connected. \(remoteGameService.connectedPeers)")
+    }
+
+
+    func didDisconnect() {
+
+        showModalAlert(message: "Peer disconnected. \(remoteGameService.connectedPeers)")
+    }
+
 
     func didReceiveMove(x: Int, y: Int) {
 
@@ -75,18 +117,13 @@ extension GameViewController: RemoteGameSessionDelegate {
             return
         }
 
-        sendValidMove = false
-
         game.makeMove(x: x, y: y)
     }
 
 
     func didResignGame() {
 
-        game = nil
-        remoteGameSession = nil
-
-        // game.resign(player: remotePlayer)
+//        game.resign(player: remotePlayer)
 
         print("Remote player resigned.")
     }
@@ -135,6 +172,21 @@ extension GameViewController: GameDelegate {
     }
 
 
+    func validMove(x: Int, y: Int) {
+
+        guard let remotePlayer = remotePlayer,
+            remotePlayer != game.currentPlayer else {
+                return
+        }
+
+        guard remoteGameService.connectedPeers.count > 0 else {
+            return
+        }
+
+        remoteGameService.sendMove(x: x, y: y)
+    }
+
+
     func invalidMove(x: Int, y: Int, reason: Game.InvalidMoveReason) {
 
         switch reason {
@@ -148,16 +200,6 @@ extension GameViewController: GameDelegate {
             showModalAlert(message:
                 "You are not allowed to copy your opponent's previous move.")
         }
-    }
-
-
-    func validMove(x: Int, y: Int) {
-
-        guard sendValidMove else {
-            return
-        }
-
-        //remoteGameSession?.sendMove(x: x, y: y)
     }
 
 

@@ -1,5 +1,5 @@
 //
-//  RemoteGameSession.swift
+//  RemoteGameService.swift
 //  Touch
 //
 //  Created by sean on 14/02/2017.
@@ -11,7 +11,23 @@ import Foundation
 import MultipeerConnectivity
 
 
+protocol RemoteGameBrowserDelegate {
+
+    func didFindPeer(peer: String, inviteHandler: @escaping (Bool) -> Void)
+}
+
+
+protocol RemoteGameAdvertiserDelegate {
+
+    func didReceiveInvitation(peer: String, invitationHandler: @escaping (Bool) -> Void)
+}
+
+
 protocol RemoteGameSessionDelegate {
+
+    func didConnect()
+
+    func didDisconnect()
 
     func didReceiveMove(x: Int, y: Int)
 
@@ -19,17 +35,7 @@ protocol RemoteGameSessionDelegate {
 }
 
 
-protocol RemoteGameConnectionDelegate {
-
-    func didConnect()
-
-    func didDisconnect()
-
-    func didReceiveInvitation(invitationHandler: @escaping (Bool) -> Void)
-}
-
-
-class RemoteGameSession {
+class RemoteGameService {
 
     private lazy var service: MultipeerService = {
         let service = MultipeerService(serviceName: Config.MultipeerService.serviceType)
@@ -42,33 +48,55 @@ class RemoteGameSession {
         return service.connectedPeers.map { $0.displayName }
     }
 
+    var isConnected: Bool {
+        return service.connectedPeers.count > 0
+    }
 
-    var delegate: RemoteGameSessionDelegate?
+    private(set) var isAdvertising = false
 
-    var connectionDelegate: RemoteGameConnectionDelegate?
+    private(set) var isBrowsing = false
+
+    var sessionDelegate: RemoteGameSessionDelegate?
+
+    var advertiserDelegate: RemoteGameAdvertiserDelegate?
+
+    var browserDelegate: RemoteGameBrowserDelegate?
 
 
     func startAdvertising() {
+        guard !isAdvertising else { return }
+
         service.startAdvertising()
+        isAdvertising = true
     }
 
 
     func stopAdvertising() {
+        guard isAdvertising else { return }
+
         service.stopAdvertising()
+        isAdvertising = false
     }
 
 
     func startBrowsing() {
+        guard !isBrowsing else { return }
+
         service.startBrowsing()
+        isBrowsing = true
     }
 
 
     func stopBrowsing() {
+        guard isBrowsing else { return }
+
         service.stopBrowsing()
+        isBrowsing = false
     }
 
     
     func sendMove(x: Int, y: Int) {
+        guard isConnected else { return }
 
         let message = Message.move(x: x, y: y).serialize()
         service.sendMessage(message: message)
@@ -76,21 +104,38 @@ class RemoteGameSession {
 
 
     func sendResign() {
-
+        guard isConnected else { return }
+        
         let message = Message.resign.serialize()
         service.sendMessage(message: message)
     }
 }
 
 
-extension RemoteGameSession: MultipeerServiceDelegate {
+extension RemoteGameService: MultipeerServiceDelegate {
+
+    func didFindPeer(peer: MCPeerID, inviteHandler: @escaping (Bool) -> Void) {
+
+        print("FOUND PEER \(peer.displayName)")
+
+        browserDelegate?.didFindPeer(peer: peer.displayName, inviteHandler: inviteHandler)
+    }
+
+
+    func didReceiveInvitation(peer: MCPeerID, invitationHandler: @escaping (Bool) -> Void) {
+
+        print("PEERS: \(connectedPeers)")
+
+        advertiserDelegate?.didReceiveInvitation(peer: peer.displayName, invitationHandler: invitationHandler)
+    }
+
 
     func peerDidConnect(peer: MCPeerID) {
 
         print("PLAYER \(peer.displayName) CONNECTED")
 
         DispatchQueue.main.sync {
-            connectionDelegate?.didConnect()
+            sessionDelegate?.didConnect()
         }
     }
 
@@ -100,28 +145,14 @@ extension RemoteGameSession: MultipeerServiceDelegate {
         print("PLAYER \(peer.displayName) DISCONNECTED")
 
         DispatchQueue.main.sync {
-            connectionDelegate?.didDisconnect()
+            sessionDelegate?.didDisconnect()
         }
     }
+    
 
+    func didReceiveMessage(peer: MCPeerID, message: String) {
 
-    func didReceiveInvitation(invitationHandler: @escaping (Bool) -> Void) {
-
-        print("PEERS: \(connectedPeers)")
-
-        guard connectedPeers.count <= 1 else {
-            print("Already connected to another peer")
-            return
-        }
-
-        connectionDelegate?.didReceiveInvitation(invitationHandler: invitationHandler)
-    }
-
-
-    func didReceiveMessage(message: String, from peerID: MCPeerID) {
-
-        let displayName = peerID.displayName
-        print("MESSAGE FROM \(displayName): \(message)")
+        print("MESSAGE FROM \(peer.displayName): \(message)")
 
         guard let message = Message.deserialize(string: message) else {
             return
@@ -130,19 +161,19 @@ extension RemoteGameSession: MultipeerServiceDelegate {
         switch message {
         case .move(let x, let y):
             DispatchQueue.main.sync {
-                delegate?.didReceiveMove(x: x, y: y)
+                sessionDelegate?.didReceiveMove(x: x, y: y)
             }
 
         case .resign:
             DispatchQueue.main.sync {
-                delegate?.didResignGame()
+                sessionDelegate?.didResignGame()
             }
         }
     }
 }
 
 
-extension RemoteGameSession {
+extension RemoteGameService {
 
     fileprivate enum Message {
 
@@ -150,18 +181,14 @@ extension RemoteGameSession {
         case resign
 
 
-        static let commandMove = "MOVE"
-        static let commandResign = "QUIT"
-
-
         func serialize() -> String {
 
             switch self {
             case .move(let x, let y):
-                return "\(Message.commandMove) \(x) \(y)"
+                return "MOVE \(x) \(y)"
 
             case .resign:
-                return "\(Message.commandResign)"
+                return "QUIT"
             }
         }
 
@@ -171,10 +198,10 @@ extension RemoteGameSession {
             let components = string.components(separatedBy: " ")
 
             switch components[0] {
-            case commandMove:
+            case "MOVE":
                 return .move(x: Int(components[1])!, y: Int(components[2])!)
 
-            case commandResign:
+            case "QUIT":
                 return .resign
                 
             default:

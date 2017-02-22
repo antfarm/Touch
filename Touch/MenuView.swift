@@ -14,16 +14,23 @@ class MenuView: UIView {
     @IBOutlet var stackView: UIStackView!
 
     @IBOutlet var newGameButton: UIButton!
-    @IBOutlet var newNetworkGameButton: UIButton!
     @IBOutlet var continueGameButton: UIButton!
     @IBOutlet var resignGameButton: UIButton!
 
 
+    private lazy var menuButtons: [UIButton] = {
+        return self.stackView.subviews.filter { $0 is UIButton }
+    }() as! [UIButton]
+
+    
     private lazy var visibleMenuButtonsForState: [MenuViewController.State: [UIButton]] = [
+
+        .empty: [
+
+        ],
 
         .initial: [
             self.newGameButton,
-            self.newNetworkGameButton
         ],
 
         .gameInProgress: [
@@ -33,11 +40,6 @@ class MenuView: UIView {
     ]
 
 
-    private lazy var menuButtons: [UIButton] = {
-        return self.stackView.subviews.filter { $0 is UIButton }
-    }() as! [UIButton]
-
-    
     func showMenuForState(state: MenuViewController.State) {
 
         if let buttons = visibleMenuButtonsForState[state] {
