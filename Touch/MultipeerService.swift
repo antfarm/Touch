@@ -213,7 +213,7 @@ extension MultipeerService: MCSessionDelegate {
 
 
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String,
-                 fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
+                 fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         // not used
     }
 
